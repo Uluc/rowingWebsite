@@ -11,6 +11,8 @@
     <style>
         body{
             background-image: url("{% static 'rowingWebsiteApp/Images/background.png' %}");
+            background-position-y: 20px;
+            
             background-size: 100%;
             background-repeat: repeat-y;
         }
@@ -18,46 +20,61 @@
             height: 120px;
             width: auto;
         }
+        .navbar-nav >li{
+            font-size: 13px;
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+        header{
+        
+        }
 
-
-
+        
 
     </style>
 
 </head>
 <body>
-    <header>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <div class="navbar-collapse collapse justify-item-center">
-                            <ul class="navbar-nav ml-auto text-center">
-                                <li class="nav-item active px-5">
-                                    <a class="nav-link" href="#">Link</a>
+    <header class="shadow-lg">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-center">
+                    <div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0">
+                        <ul class="navbar-nav ml-auto text-center">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Roster</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Coaching</a>
+                            </li>
+                            <li class="nav-item">
+                                    <a class="nav-link" href="#">Recruitment</a>
                                 </li>
-                                <li class="nav-item px-5">
-                                    <a class="nav-link" href="#">Link</a>
-                                </li>
-                                <li class="nav-item px-5">
-                                    <a class="nav-link" href="#">Link</a>
-                                </li>
-                            </ul>
+                        </ul>
                     </div>
-                    <div class="justify-item-center">
-                            <img class= "vector"src="{% static 'rowingWebsiteApp/Images/CrestFinaltest.svg' %}" alt="">
+                    <div class="justify-content-center">
+                            <img class= "vector "src="{% static 'rowingWebsiteApp/Images/CrestFinaltest.svg' %}" alt="">
                     </div>
-                    <div class="navbar-collapse collapse">
-                            <ul class="navbar-nav mr-auto text-center">
-                                <li class="nav-item px-5">
-                                    <a class="nav-link" href="#">Link</a>
+                    <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2">
+                        <ul class="navbar-nav mr-auto text-center">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">About Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Schedule</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Sponsor</a>
+                            </li>
+                            <li class="nav-item">
+                                    <a class="nav-link" href="#">Photo Gallery</a>
                                 </li>
-                                <li class="nav-item px-5">
-                                    <a class="nav-link" href="#">Link</a>
-                                </li>
-                                <li class="nav-item px-5">
-                                    <a class="nav-link" href="#">Link</a>
-                                </li>
-                            </ul>
-                        </div>
-                </nav>
+                        </ul>
+                    </div>
+
+            </nav>
+                
     </header>
     
     <div>
