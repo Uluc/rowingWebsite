@@ -10,16 +10,58 @@
     
     <style>
         body{
-            background-image:"{% static 'rowingWebsiteApp/Images/background.png' %}",
-            back
+            background-image: url("{% static 'rowingWebsiteApp/Images/background.png' %}");
+            background-size: 100%;
+            background-repeat: repeat-y;
         }
+        .vector{
+            height: 120px;
+            width: auto;
+        }
+
+
+
+
     </style>
 
 </head>
 <body>
-
+    <header>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="navbar-collapse collapse justify-item-center">
+                            <ul class="navbar-nav ml-auto text-center">
+                                <li class="nav-item active px-5">
+                                    <a class="nav-link" href="#">Link</a>
+                                </li>
+                                <li class="nav-item px-5">
+                                    <a class="nav-link" href="#">Link</a>
+                                </li>
+                                <li class="nav-item px-5">
+                                    <a class="nav-link" href="#">Link</a>
+                                </li>
+                            </ul>
+                    </div>
+                    <div class="justify-item-center">
+                            <img class= "vector"src="{% static 'rowingWebsiteApp/Images/CrestFinaltest.svg' %}" alt="">
+                    </div>
+                    <div class="navbar-collapse collapse">
+                            <ul class="navbar-nav mr-auto text-center">
+                                <li class="nav-item px-5">
+                                    <a class="nav-link" href="#">Link</a>
+                                </li>
+                                <li class="nav-item px-5">
+                                    <a class="nav-link" href="#">Link</a>
+                                </li>
+                                <li class="nav-item px-5">
+                                    <a class="nav-link" href="#">Link</a>
+                                </li>
+                            </ul>
+                        </div>
+                </nav>
+    </header>
+    
     <div>
-            <img class="img-fluid" src="{% static 'rowingWebsiteApp/Images/background.png' %}" />
+            
 
     </div>
 
