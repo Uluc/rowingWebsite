@@ -7,3 +7,6 @@ def home(request):
 
 def roster(request):
     return render(request, 'rowingWebsiteApp/rosterPage.htm')
+
+def schedule(request):
+    return render(request, 'rowingWebsiteApp/schedulePage.htm')

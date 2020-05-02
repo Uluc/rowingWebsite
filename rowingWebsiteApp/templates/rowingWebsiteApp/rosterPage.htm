@@ -1,94 +1,115 @@
 {% extends "rowingWebsiteApp/base.htm" %}
 {% load static %}
 
+
 {% block content %}
 
+    <head> <link href="https://fonts.googleapis.com/css?family=Teko:600&display=swap" rel="stylesheet"></head>
     <style>
-        .bg{
-
-            background-image: url("{% static 'rowingWebsiteApp/Images/MAIN.jpg' %}");
-            height:75vh;
-            width: 100%;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        
+        p  h1{ 
+            font-family: 'Open Sans', sans-serif;
         }
-
 
         .block {
             overflow: hidden;
-            background: lightslategrey;
-            
-            width: 400px;
-            border-radius: 1%;
+
         }
         .block:hover{
             color: black;
             opacity: 0.8;
         }
         .block img {
-            width: 150px;
-            height: 150px;
+            max-width: 350px;
+
             float: left;
-            margin: 0 1rem 0 0;
         }
-        .block h2 {
-            color: aliceblue;
-            padding-top: 2%;
-            font-weight: 400;
+        .header{
+            background-color: #461D7C;
         }
-        .block h5 {
-            color: aliceblue;
+        .header > h1{
+            color: #FDD023;
+            font-size: 55px;
+            font-family: 'Teko', sans-serif;
+        }
+
+        h3 h4 { 
+            color:mintcream;
+        }
+        h2 {
+            color: #461D7C;
+        }
+        .name{
+            background: white; 
+        }
+        .stats{
+            background:#d6d6d6;
+        }
+        .player-card{
+            border-style:solid;
+            border-width: 1px;
+            border-color: gray;
+        }
+        .text-set{
+            font-weight: 700;
+            margin-right: 5px;
+        }
+        .text-values{
             font-weight: 200;
-
         }
-
     </style>
-    
-    <div>
-        <h1 class="text-center pt-5">
-            Men's Crew
-        </h1>
-        <div class="container mx-5  d-flex flex-wrap">
-            <div class="block shadow-lg">
-                <img class="image" src="{% static 'rowingWebsiteApp/Images/Uluc.jpg' %}" alt="">
-                <h2> Uluc Ozdenvar</h2>
-                <hr class="px-2">
-                <h5> Starboard </h5>
-                <h5> 6'7 </h5>
-                <h5> Computer Science, Junior</h5>
+
+
+        <div class="header shadow-lg">
+            <h1 class="text-center py-3">
+                Men's Varsity
+            </h1>
+        </div>
+        <div class="container mx-1 my-2 d-flex flex-wrap">
+            <div class="d-flex flex-column player-card mx-1 block">
+                <img src="{% static 'rowingWebsiteApp/Images/Uluc.jpg' %}" alt="">
+                <div class="adjustment">
+                    <h2 class="text-center py-lg-5 name"> Uluc Ozdenvar</h2>
+                    <div class="stats py-2 d-flex flex-row">
+                        <div class="py-2 ml-3 mr-2">
+                            <h5 class="text-set"> Orientation: </h5> 
+                            <h5 class="text-set"> Hometown: </h5>    
+                            <h5 class="text-set"> Major: </h5>
+                        </div>
+                        <div class="py-2">   
+                            <h5 class="text-values"> Starboard </h5>                       
+                            <h5 class="text-values"> Istanbul, Turkey </h5>                       
+                            <h5 class="text-values"> Computer Science, Senior </h5>            
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <h1 class="text-center pt-5">
-            Women's Crew
-        </h1>
-        <div class="container mx-5 p-xl-3 d-flex flex-wrap">
-                <div class="block shadow-lg">
-                    <img class="image" src="{% static 'rowingWebsiteApp/Images/Uluc.jpg' %}" alt="">
-                    <h2> Uluc Ozdenvar</h2>
-                    <hr class="px-2">
-                    <h5> Starboard </h5>
-                    <h5> 6'7 </h5>
-                    <h5> Computer Science, Junior</h5>
-                </div>
-            </div>
-        <h1 class="text-center pt-5">
-            Coxswains
-        </h1>
-        <div class="container mx-5 p-xl-3 d-flex flex-wrap">
-                <div class="block shadow-lg">
-                    <img class="image" src="{% static 'rowingWebsiteApp/Images/Uluc.jpg' %}" alt="">
-                    <h2> Uluc Ozdenvar</h2>
-                    <hr class="px-2">
-                    <h5> Starboard </h5>
-                    <h5> 6'7 </h5>
-                    <h5> Computer Science, Junior</h5>
-                </div>
-            </div>
-    </div>
+       
+            
+        <div class="header shadow-lg">
+            <h1 class="text-center py-3">
+                Women's Varsity
+            </h1>
+        </div>
+        <div class="header shadow-lg">
+            <h1 class="text-center py-3">
+                Men's Novice
+            </h1>
+        </div>
+        <div class="header shadow-lg">
+            <h1 class="text-center py-3">
+                Women's Novice
+            </h1>
+        </div>
+        <div class="header shadow-lg">
+            <h1 class="text-center py-3">
+                Coxswains
+            </h1>
+        </div>
+                
+            
+        
 
     
     
