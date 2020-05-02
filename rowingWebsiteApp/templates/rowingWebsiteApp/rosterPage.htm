@@ -1,9 +1,95 @@
-<!DOCTYPE html>
-<html>
-    <head>
+{% extends "rowingWebsiteApp/base.htm" %}
+{% load static %}
 
-    </head>
-    <body>
-        <h1>This is Roster/h1>
-    </body>
-</html>
+{% block content %}
+
+    <style>
+        .bg{
+
+            background-image: url("{% static 'rowingWebsiteApp/Images/MAIN.jpg' %}");
+            height:75vh;
+            width: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        .block {
+            overflow: hidden;
+            background: lightslategrey;
+            
+            width: 400px;
+            border-radius: 1%;
+        }
+        .block:hover{
+            color: black;
+            opacity: 0.8;
+        }
+        .block img {
+            width: 150px;
+            height: 150px;
+            float: left;
+            margin: 0 1rem 0 0;
+        }
+        .block h2 {
+            color: aliceblue;
+            padding-top: 2%;
+            font-weight: 400;
+        }
+        .block h5 {
+            color: aliceblue;
+            font-weight: 200;
+
+        }
+
+    </style>
+    
+    <div>
+        <h1 class="text-center pt-5">
+            Men's Crew
+        </h1>
+        <div class="container mx-5  d-flex flex-wrap">
+            <div class="block shadow-lg">
+                <img class="image" src="{% static 'rowingWebsiteApp/Images/Uluc.jpg' %}" alt="">
+                <h2> Uluc Ozdenvar</h2>
+                <hr class="px-2">
+                <h5> Starboard </h5>
+                <h5> 6'7 </h5>
+                <h5> Computer Science, Junior</h5>
+            </div>
+        </div>
+        <h1 class="text-center pt-5">
+            Women's Crew
+        </h1>
+        <div class="container mx-5 p-xl-3 d-flex flex-wrap">
+                <div class="block shadow-lg">
+                    <img class="image" src="{% static 'rowingWebsiteApp/Images/Uluc.jpg' %}" alt="">
+                    <h2> Uluc Ozdenvar</h2>
+                    <hr class="px-2">
+                    <h5> Starboard </h5>
+                    <h5> 6'7 </h5>
+                    <h5> Computer Science, Junior</h5>
+                </div>
+            </div>
+        <h1 class="text-center pt-5">
+            Coxswains
+        </h1>
+        <div class="container mx-5 p-xl-3 d-flex flex-wrap">
+                <div class="block shadow-lg">
+                    <img class="image" src="{% static 'rowingWebsiteApp/Images/Uluc.jpg' %}" alt="">
+                    <h2> Uluc Ozdenvar</h2>
+                    <hr class="px-2">
+                    <h5> Starboard </h5>
+                    <h5> 6'7 </h5>
+                    <h5> Computer Science, Junior</h5>
+                </div>
+            </div>
+    </div>
+
+    
+    
+{% endblock content %}

@@ -27,8 +27,11 @@
             padding-right: 12px;
             font-family: 'Oswald';
         }
-        header{
-           
+        #main-view{
+        margin-right: 14%;
+        margin-left: 14%;
+        height: 100%;
+        min-width: 450px;
         }
 
         
@@ -74,11 +77,82 @@
                     </ul>
                 </div>
             </nav>
-
+        
+            {% block top %}
+            {% endblock top %}
             
-    
-        {% block content %}
-        {% endblock content %}
+        <div id="main-view" class="align-content-lg-center" style="background-color: lightgrey">
+            {% block content %}
+            {% endblock content %}
+
+            <hr>
+            <div>
+                    <div class="text-center pt-2 ">
+                        <h2>Get in Contact with Us!</h2>
+                    </div>
+                    <div class="row p-xl-5">
+        
+                        <div class="text-dark col-md align-self-center">
+                            <div class="row">
+                                <p>We have practice every Monday-Friday from 5:45am - 7:00am, why not join us and see how it
+                                goes! </p>
+                            </div>
+                            <div class="row justify-content-center">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3440.6503037185644!2d-91.173418!3d30.417662!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8626a6d835c0790b%3A0xba1d8265a4d095cc!2s3355%20Dalrymple%20Dr%2C%20Baton%20Rouge%2C%20LA%2070802!5e0!3m2!1sen!2sus!4v1587460010960!5m2!1sen!2sus" width="400" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                            </div>
+                        </div>
+        
+                        <div class="col-md">
+                            <h6 class="pb-1">Reach us on Social Media</h6>
+
+        
+                            <h6 class="py-2">Send us a Message</h6>
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="form_name">Firstname:</label>
+                                            <input id="form_name" type="text" name="name" class="form-control" placeholder="Firstname" required="required" data-error="Firstname is required.">
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="form_lastname">Lastname:</label>
+                                            <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Lastname" required="required" data-error="Lastname is required.">
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="form_email">Email:</label>
+                                            <input id="form_email" type="email" name="email" class="form-control" placeholder="Example@email.com" required="required" data-error="Valid email is required.">
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="form_message">Message:</label>
+                                            <textarea id="form_message" name="message" class="form-control" placeholder="Insert Message Here" rows="4" required="required" data-error="Please, leave us a message."></textarea>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="submit" class="btn btn-success btn-send" value="Send message">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+
+        
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
