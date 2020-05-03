@@ -1,0 +1,86 @@
+{% extends "rowingWebsiteApp/base.htm" %}
+{% load static %}
+
+
+{% block content %}
+
+<head> 
+        <link href="https://fonts.googleapis.com/css?family=Teko:600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:200,400&display=swap" rel="stylesheet">
+    </head>
+
+    <style>
+
+        h1{
+            font-size: 55px;
+            font-family: 'Roboto Slab', serif;
+        }
+
+        .block {
+            overflow: hidden;
+        }
+        .block:hover{
+            color: black;
+            opacity: 0.8;
+        }
+        .block img {
+            max-width: 350px;
+            float: left;
+        }
+
+        h2 {
+            color: #461D7C;
+        }
+        .position-name{
+        }
+        .position-name > h3{
+            
+            font-weight: 300;
+        }
+        .position-name > h2{
+            
+            font-weight: 600;
+
+        }
+        .player-card{
+  
+            font-family: 'Roboto Slab', serif;
+            max-width: 350px;
+        }
+
+        .center-flow{
+
+            display: flex;
+            justify-content: space-around;
+        }
+
+    </style>
+
+
+        <h1 class="text-center pt-5 py-3">
+            Coaching
+        </h1>
+        <div class=" mx-1 my-2 center-flow flex-wrap">
+            <div class="d-flex flex-column player-card mx-1 block">
+                <div>
+                    <img src="{% static 'rowingWebsiteApp/Images/Uluc.jpg' %}" alt="" class="mb-3">
+                    <div class="position-name">
+                        <h2 class="text-center"> Head Coach</h2>
+                        <h3 class="text-center"> Matt Craft</h3>
+                    </div>
+                    <div>
+                    <p class="mx-2 mt-3">Matt Craft is not a man of many words but it should be said that he is a living
+                        legened among men. Rumor has it that Matt previously pulled a sub 6 5k. Unbelievable. IKR!! 
+                        He though Ollie Zeidler how to scull why do you think he is a tank. 
+                    </p>
+                    </div> 
+                </div>
+            </div>    
+        </div>
+        <h1 class="text-center pt-5 py-3">
+            Officers
+        </h1>
+
+    
+    
+{% endblock content %}
