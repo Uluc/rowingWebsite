@@ -10,3 +10,6 @@ def roster(request):
 
 def schedule(request):
     return render(request, 'rowingWebsiteApp/schedulePage.htm')
+    
+def sponsor(request):
+    return render(request, 'rowingWebsiteApp/sponsorPage.htm')
