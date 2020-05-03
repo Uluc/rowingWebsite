@@ -13,3 +13,9 @@ def schedule(request):
     
 def sponsor(request):
     return render(request, 'rowingWebsiteApp/sponsorPage.htm')
+
+def recruitment(request):
+    return render(request, 'rowingWebsiteApp/recruitmentPage.htm')
+
+def leadership(request):
+    return render(request, 'rowingWebsiteApp/leadershipPage.htm')
