@@ -5,6 +5,10 @@
 
 {% block top %}
 
+<head> 
+        <link href="https://fonts.googleapis.com/css?family=Teko:600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:200,400&display=swap" rel="stylesheet">
+    </head>
     <style>
         .bg{
 
@@ -12,11 +16,24 @@
             height:75vh;
             width: 100%;
             background-position: center;
+            background-attachment: fixed;
             background-repeat: no-repeat;
             background-size: cover;
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+        .text-center{
+            line-height: 3;
+        }
+
+        h1{
+            font-size: 45px;
+            font-family: 'Roboto Slab', serif;
+        }
+        p{
+            font-family: 'Roboto Slab', serif;
+            font-weight: 400;
         }
 
     </style>
@@ -27,3 +44,70 @@
     
     
 {% endblock top %}
+
+{% block content %}
+
+    <div id="main-view">
+        <div>
+            <div class="text-dark text-center pt-5">
+                <h1>Who Are We?</h1>
+            </div>
+
+            <div class="row p-xl-5">
+                <div class="text-dark col-md align-self-center">
+                    <p class="text-center">Each person who walks on our dock has a different story of how they got there but we
+                    all have one thing in common, dedication.  Most of us didn't know the first thing about rowing when we started but we have grown together as a crew and as a team to compete in
+                    regattas across the south. LSU Rowing aims to employ our mission statement with every
+                    practice and regatta we attend.
+                    </p>
+                </div>
+                <div class="col-md">
+                    <img class="img-fluid shadow-md" src="{% static '/rowingWebsiteApp/Images/Devin-Sunrise.JPG'%}" alt="">
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div>
+            <div class="text-center pt-5">
+                <h1>What is Rowing?</h1>
+            </div>
+            <div class="row p-xl-5">
+                <div class="text-dark col-md">
+                    <img class="img-fluid shadow-md" src="{% static '/rowingWebsiteApp/Images/Boat_Inside.JPG'%}" alt="">
+                </div>
+                <div class="text-dark col-md align-self-center">
+                    <p class="text-center">Each person who walks on our dock has a different story of how they got there but we
+                        all have one thing in common, dedication.  Most of us didn't know the first thing about
+                        rowing when we started but we have grown together as a crew and as a team to compete in
+                        regattas across the south. LSU Rowing aims to employ our mission statement with every
+                        practice and regatta we attend.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <hr >
+
+        <div>
+            <div class="text-center pt-5">
+                <h1>Interested In Joining?</h1>
+            </div>
+            <div class="row p-xl-5">
+                <div class="text-dark col-md align-self-center">
+                    <p class="text-center">Each person who walks on our dock has a different story of how they got there but we
+                        all have one thing in common, dedication.  Most of us didn't know the first thing about
+                        rowing when we started but we have grown together as a crew and as a team to compete in
+                        regattas across the south. LSU Rowing aims to employ our mission statement with every
+                        practice and regatta we attend.
+                    </p>
+                </div>
+                <div class="text-dark col-md">
+                    <img class="img-fluid shadow-lg" src="{% static '/rowingWebsiteApp/Images/Join.JPG'%}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
