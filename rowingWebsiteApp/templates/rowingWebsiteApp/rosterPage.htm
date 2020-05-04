@@ -38,9 +38,7 @@
         .name{
             background: white; 
         }
-        .stats{
-            background:#d6d6d6;
-        }
+
         .player-card{
             border-style:solid;
             border-width: 1px;
@@ -53,6 +51,11 @@
         .text-values{
             font-weight: 200;
         }
+        .center-flow{
+
+display: flex;
+justify-content: space-around;
+}
     </style>
 
 
@@ -61,12 +64,12 @@
                 Men's Varsity
             </h1>
         </div>
-        <div class="container mx-1 my-2 d-flex flex-wrap">
+        <div class="mx-1 my-2 center-flow flex-wrap">
             <div class="d-flex flex-column player-card mx-1 block">
                 <img src="{% static 'rowingWebsiteApp/Images/Uluc.jpg' %}" alt="">
-                <div class="adjustment">
+                <div>
                     <h2 class="text-center py-lg-5 name"> Uluc Ozdenvar</h2>
-                    <div class="stats py-2 d-flex flex-row">
+                    <div class="py-2 d-flex flex-row">
                         <div class="py-2 ml-3 mr-2">
                             <h5 class="text-set"> Orientation: </h5> 
                             <h5 class="text-set"> Hometown: </h5>    
@@ -79,35 +82,29 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            
+            </div>   
         </div>
        
             
-        <div class="header shadow-lg">
-            <h1 class="text-center py-3">
-                Women's Varsity
-            </h1>
-        </div>
-        <div class="header shadow-lg">
-            <h1 class="text-center py-3">
-                Men's Novice
-            </h1>
-        </div>
-        <div class="header shadow-lg">
-            <h1 class="text-center py-3">
-                Women's Novice
-            </h1>
-        </div>
-        <div class="header shadow-lg">
-            <h1 class="text-center py-3">
-                Coxswains
-            </h1>
-        </div>
+    <div class="header shadow-lg">
+        <h1 class="text-center py-3">
+            Women's Varsity
+        </h1>
+    </div>
+    <div class="header shadow-lg">
+        <h1 class="text-center py-3">
+            Men's Novice
+        </h1>
+    </div>
+    <div class="header shadow-lg">
+        <h1 class="text-center py-3">
+            Women's Novice
+        </h1>
+    </div>
+    <div class="header shadow-lg">
+        <h1 class="text-center py-3">
+            Coxswains
+        </h1>
+    </div>
                 
-            
-        
-
-    
-    
 {% endblock content %}
