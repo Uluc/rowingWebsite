@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Rowers
 # Create your views here.
 
 rowers = [
@@ -34,7 +35,7 @@ def home(request):
 
 def roster(request):
     data = {
-        'rowers': rowers,
+        'rowers': Rowers.objects.all(),
         'nbar': 'roster'
     }
     return render(request, 'rowingWebsiteApp/rosterPage.htm', data)
