@@ -6,3 +6,6 @@ class Rowers(models.Model):
     orientation = models.TextField()
     hometown = models.TextField()
     major = models.TextField()
+
+    def __str__(self): 
+        return self.name

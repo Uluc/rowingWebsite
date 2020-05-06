@@ -16,7 +16,7 @@
             opacity: 0.8;
         }
         .block img {
-            max-width: 350px;
+            max-width:375px;
 
             float: left;
         }
@@ -57,18 +57,18 @@ display: flex;
 justify-content: space-around;
 }
     </style>
-
-
         <div class="header shadow-lg">
             <h1 class="text-center py-3">
                 Men's Varsity
             </h1>
         </div>
+        
         <div class="mx-1 my-2 center-flow flex-wrap">
-            <div class="d-flex flex-column player-card mx-1 block">
+        {% for rower in rowers %}
+            <div class="d-flex flex-column player-card mx-1 block my-2">
                 <img src="{% static 'rowingWebsiteApp/Images/Uluc.jpg' %}" alt="">
                 <div>
-                    <h2 class="text-center py-lg-5 name"> Uluc Ozdenvar</h2>
+                    <h2 class="text-center py-lg-5 name"> {{ rower.name }}</h2>
                     <div class="py-2 d-flex flex-row">
                         <div class="py-2 ml-3 mr-2">
                             <h5 class="text-set"> Orientation: </h5> 
@@ -76,13 +76,14 @@ justify-content: space-around;
                             <h5 class="text-set"> Major: </h5>
                         </div>
                         <div class="py-2">   
-                            <h5 class="text-values"> Starboard </h5>                       
-                            <h5 class="text-values"> Istanbul, Turkey </h5>                       
-                            <h5 class="text-values"> Computer Science, Senior </h5>            
+                            <h5 class="text-values"> {{ rower.orientation }} </h5>                       
+                            <h5 class="text-values"> {{ rower.hometown }} </h5>                       
+                            <h5 class="text-values"> {{ rower.major }} </h5>            
                         </div>
                     </div>
                 </div>
             </div>   
+            {% endfor %}
         </div>
        
             
