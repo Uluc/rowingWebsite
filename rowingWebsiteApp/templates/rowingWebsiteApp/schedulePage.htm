@@ -1,11 +1,6 @@
 {% extends "rowingWebsiteApp/base.htm" %}
 {% load static %}
 
-{% block header_scripts %}
-  <script type="text/javascript">
-    var races = JSON.stringify('{{ data.races }}').replace(/&quot;/g,`"`).replace(/&amp;/g, "&");
-  </script>
-{% endblock %}
 
 {% block content %}
 
@@ -70,17 +65,10 @@
             </h1>
         </div>
         <div id="fall-races">
-            {% for race in race %}
-                <div class="regatta-card my-2 mx-2 ">
-                    <h2 class="center-text py-2">{{ race.date }}</h2>
-                    <h1 class="text-center my-2">{{ race.name }}</h1>
-                    <h3 class="text-center mb-3">{{ race.location}}</h3>
-                    <h6 class="text-center"><a href="#">Recap</a></h6>
-                </div>
-            {% endfor %}
+            
         </div>
 
-        <input type="button" onclick="findChildren()" value="Click it" />
+        <!---<input type="button" onclick="findChildren()" value="Click it" />-->
 
         <div class="header shadow-lg">
             <h1 class="text-center py-3">
@@ -94,24 +82,29 @@
     </div>
 
     <script>
-        function findChildren() {
-            /*for(i=0; i<races.length; i++){
+        $(document).ready(function(){
+            var racesDict  = '{{races}}';
+            
+            var races = JSON.parse(racesDict.replace(/&quot;/g,`"`));
+            var spring = document.getElementById('spring-races');
+            var fall = document.getElementById('fall-races');
+
+            for(i=0; i<races.length; i++){
                 var htmlString = `<div class="regatta-card my-2 mx-2 ">
-                    <h2 class="center-text py-2">{{ race.date }}</h2>
-                    <h1 class="text-center my-2">{{ race.name }}</h1>
-                    <h3 class="text-center m-3">{{ race.location}}</h3>
+                    <h2 class="center-text py-2">${races[i].date}</h2>
+                    <h1 class="text-center my-2">${races[i].name}</h1>
+                    <h3 class="text-center m-3">${races[i].location}</h3>
                     <h6 class="text-center"><a href="#">Recap</a></h6>
                 </div>`;
-                ${variable} more html stuff`;
-                If(race[i].semester == fall){
-                $(#’falldiv’).append(htmlString);
+                if(races[i].semester === 'Fall'){
+                    $(fall).html(htmlString);
                 }
-                Else{
-
-                (#’spring dig ’).append(htmlString)
-                }*/
-            console.log(races);
+                else{
+                    $(spring).html(htmlString);
+                }
             }
+            console.log(races);
+        });
     </script>
 
         

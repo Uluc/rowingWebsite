@@ -10,18 +10,14 @@ def home(request):
     return render(request, 'rowingWebsiteApp/homePage.htm', {'nbar': 'home'})
 
 def roster(request):
-    data = {
-        'rower': Rower.objects.all(),
-        'nbar': 'roster'
-    }
-    return render(request, 'rowingWebsiteApp/rosterPage.htm', data)
+    nbar = 'roster'
+    rowers = json.dumps([model_to_dict(item) for item in Rower.objects.all()])
+    return render(request, 'rowingWebsiteApp/rosterPage.htm', {'nbar':nbar, 'rowers':rowers} )
 
 def schedule(request):
-    data = {}
-    data["races"] = json.dumps([model_to_dict(item) for item in Race.objects.all()])
-    data['nbar'] =  'schedule'
-    
-    return render(request, 'rowingWebsiteApp/schedulePage.htm', data )
+    nbar = 'schedule'
+    races = json.dumps([model_to_dict(item) for item in Race.objects.all()])
+    return render(request, 'rowingWebsiteApp/schedulePage.htm',{'nbar':nbar, 'races':races} )
     
 def sponsor(request):
     return render(request, 'rowingWebsiteApp/sponsorPage.htm', {'nbar': 'sponsor'})
