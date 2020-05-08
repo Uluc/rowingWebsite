@@ -57,6 +57,7 @@ display: flex;
 justify-content: space-around;
 }
     </style>
+        
         <div class="header shadow-lg">
             <h1 class="text-center py-3">
                 Men's Varsity
@@ -64,26 +65,28 @@ justify-content: space-around;
         </div>
         
         <div class="mx-1 my-2 center-flow flex-wrap">
-        {% for rower in rowers %}
-            <div class="d-flex flex-column player-card mx-1 block my-2">
-                <img src= "{{ rower.picture.url }}" alt="">
-                <div>
-                    <h2 class="text-center py-lg-5 name"> {{ rower.name }}</h2>
-                    <div class="py-2 d-flex flex-row">
-                        <div class="py-2 ml-3 mr-2">
-                            <h5 class="text-set"> Orientation: </h5> 
-                            <h5 class="text-set"> Hometown: </h5>    
-                            <h5 class="text-set"> Major: </h5>
-                        </div>
-                        <div class="py-2">   
-                            <h5 class="text-values"> {{ rower.orientation }} </h5>                       
-                            <h5 class="text-values"> {{ rower.hometown }} </h5>                       
-                            <h5 class="text-values"> {{ rower.major }} </h5>            
+        {% for rower in rower %}
+            {% if "Mens" in rower.crew %}
+                <div class="d-flex flex-column player-card mx-1 block my-2" id="rower-card">
+                    <img src= "{{ rower.picture.url }}" alt="">
+                    <div>
+                        <h2 class="text-center py-lg-5 name"> {{ rower.name }}</h2>
+                        <div class="py-2 d-flex flex-row">
+                            <div class="py-2 ml-3 mr-2">
+                                <h5 class="text-set"> Orientation: </h5> 
+                                <h5 class="text-set"> Hometown: </h5>    
+                                <h5 class="text-set"> Major: </h5>
+                            </div>
+                            <div class="py-2">   
+                                <h5 class="text-values"> {{ rower.orientation }} </h5>                       
+                                <h5 class="text-values"> {{ rower.hometown }} </h5>                       
+                                <h5 class="text-values"> {{ rower.major }} </h5>            
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>   
-            {% endfor %}
+                </div>   
+            {% endif%}
+        {% endfor %}
         </div>
        
             
@@ -107,5 +110,9 @@ justify-content: space-around;
             Coxswains
         </h1>
     </div>
+
+    
                 
 {% endblock content %}
+
+

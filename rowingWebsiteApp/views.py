@@ -1,47 +1,27 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Rowers
+from .models import Race, Leadership, Event, Rower
+from django.forms.models import model_to_dict
+import json
 # Create your views here.
 
-rowers = [
-    {
-        'name': 'Uluc Ozdenvar',
-        'orientation': 'Starboard',
-        'hometown': 'Istanbul, Turkey',
-        'major': 'Computer Science'
-    },
-    {
-        'name': 'Uluc Ozdenvar',
-        'orientation': 'Starboard',
-        'hometown': 'Istanbul, Turkey',
-        'major': 'Computer Science'
-    },
-    {
-        'name': 'Uluc Ozdenvar',
-        'orientation': 'Starboard',
-        'hometown': 'Istanbul, Turkey',
-        'major': 'Computer Science'
-    },
-    {
-        'name': 'Gerard Roeling',
-        'orientation': 'Starboard',
-        'hometown': 'Austin, TX',
-        'major': 'ISDS'
-    }
-]
 
 def home(request):
     return render(request, 'rowingWebsiteApp/homePage.htm', {'nbar': 'home'})
 
 def roster(request):
     data = {
-        'rowers': Rowers.objects.all(),
+        'rower': Rower.objects.all(),
         'nbar': 'roster'
     }
     return render(request, 'rowingWebsiteApp/rosterPage.htm', data)
 
 def schedule(request):
-    return render(request, 'rowingWebsiteApp/schedulePage.htm', {'nbar': 'schedule'} )
+    data = {}
+    data["races"] = json.dumps([model_to_dict(item) for item in Race.objects.all()])
+    data['nbar'] =  'schedule'
+    
+    return render(request, 'rowingWebsiteApp/schedulePage.htm', data )
     
 def sponsor(request):
     return render(request, 'rowingWebsiteApp/sponsorPage.htm', {'nbar': 'sponsor'})
