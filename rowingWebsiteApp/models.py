@@ -26,7 +26,7 @@ class Rower(models.Model):
     
     YEAR = (
         ('Freshmen','FR'),
-        ('Sophmore','SO'),
+        ('Sophomore','SO'),
         ('Junior','JR'),
         ('Senior','SR')
     )
@@ -45,6 +45,9 @@ class Rower(models.Model):
     #displays the name
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ['name']
 
 class Race(models.Model):
 
