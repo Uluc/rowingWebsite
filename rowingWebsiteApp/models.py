@@ -1,4 +1,7 @@
 from django.db import models
+from image_cropping.fields import ImageRatioField, ImageCropField
+
+
 
 # Create your models here.
 
@@ -17,8 +20,8 @@ class Rower(models.Model):
         )
 
     VARSITY = (
-        ('Yes', 'T'),
-        ('No', 'F')
+        ('Yes', 'Yes'),
+        ('No', 'No')
         )
     
     YEAR = (
@@ -33,6 +36,7 @@ class Rower(models.Model):
     hometown = models.CharField(max_length=64)
     major = models.CharField(max_length=64)
     picture = models.ImageField(upload_to = 'rowingWebsite/rowingWebsiteApp/media/', default = 'pic_folder/None/no-img.jpg')
+    cropping = ImageRatioField('picture', '5x7')
     crew = models.CharField(max_length=64, choices=CREWS)
     varsity = models.CharField(max_length=64, choices=VARSITY)
     year = models.CharField(max_length=64, choices=YEAR)
@@ -62,16 +66,24 @@ class Event(models.Model):
     
     event = models.CharField(max_length=64)
     location= models.CharField(max_length=64)
-    date_and_time = models.CharField(max_length=64, default="To Be Announced")
+    date= models.CharField(max_length=64, default="To Be Announced")
+    time= models.CharField(max_length=64, default='')
 
     def __str__(self):
         return self.event
 
 class Leadership(models.Model):
     
+    STAFF = (
+        ('Officer','Officer'),
+        ('Coach', 'Coach'),
+    )
+
     name = models.CharField(max_length=64)
     position = models.CharField(max_length=64)
+    staff = models.CharField(max_length=64, choices=STAFF, default='Officer')
     picture = models.ImageField(upload_to = 'rowingWebsite/rowingWebsiteApp/media/', default = 'pic_folder/None/no-img.jpg')
+    cropping = ImageRatioField('picture', '5x7')
     writeUp = models.TextField()
 
     #displays the name
