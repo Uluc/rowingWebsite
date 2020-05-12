@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'image_cropping',
     'django_unused_media',
-    
+    'adminsortable2',
 ]
 
 from easy_thumbnails.conf import Settings as thumbnail_settings
