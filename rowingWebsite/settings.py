@@ -42,12 +42,21 @@ INSTALLED_APPS = [
     'image_cropping',
     'django_unused_media',
     'adminsortable2',
+    'imagekit'
 ]
 
 from easy_thumbnails.conf import Settings as thumbnail_settings
 THUMBNAIL_PROCESSORS = (
     'image_cropping.thumbnail_processors.crop_corners',
 ) + thumbnail_settings.THUMBNAIL_PROCESSORS
+
+THUMBNAIL_ALIASES = {
+    '': {
+        'avatar': {'size': (50, 50), 'crop': True},
+        'viewsize': {'size': (250, 250), 'crop': True, 'quality':100},
+        'fullsize':{'crop':False, 'quality':100}
+    },
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
