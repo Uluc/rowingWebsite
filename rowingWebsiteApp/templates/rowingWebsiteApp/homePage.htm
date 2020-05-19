@@ -4,11 +4,6 @@
 
 
 {% block top %}
-
-<head> 
-        <link href="https://fonts.googleapis.com/css?family=Teko:600&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:200,400&display=swap" rel="stylesheet">
-    </head>
     <style>
         .bg{
 
@@ -37,17 +32,18 @@
         }
 
     </style>
-        <div class="bg shadow-lg" >
-            
-        </div>
 
-    
-    
+    <video autoplay muted loop class="w-100">
+        <source src="{% static '/rowingWebsiteApp/Images/Hype.mp4'%}" type="video/mp4" />
+     </video>
+
 {% endblock top %}
 
 {% block content %}
 
-    <div id="main-view">
+
+
+    <div id="main-view" class="mt-n2">
         <div>
             <div class="text-dark text-center pt-5">
                 <h1>Who Are We?</h1>
