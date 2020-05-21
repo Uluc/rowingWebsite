@@ -1,13 +1,9 @@
 {% extends "rowingWebsiteApp/base.htm" %}
 {% load static %}
+{% load thumbnail %}
 
 
 {% block content %}
-
-<head> 
-        <link href="https://fonts.googleapis.com/css?family=Teko:600&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:200,400&display=swap" rel="stylesheet">
-    </head>
 
     <style>
 
@@ -43,7 +39,7 @@
 
         }
         .player-card{
-  
+
             font-family: 'Roboto Slab', serif;
             max-width: 350px;
         }
@@ -57,47 +53,67 @@
     </style>
 
 
-        <h1 class="text-center pt-5 py-3">
-            Coaching
-        </h1>
+    <h1 class="text-center pt-5 py-3">
+        Coaching
+    </h1>
+
+    <div class="mx-1 my-2 center-flow flex-wrap" id="coaches">   
         
-        <div class="mx-1 my-2 center-flow flex-wrap">
-            <div class="d-flex flex-column player-card mx-1 block">
-                <div>
-                    <img src="{% static 'rowingWebsiteApp/Images/Uluc.jpg' %}" alt="" class="mb-3">
-                    <div class="position-name">
-                        <h2 class="text-center"> Head Coach</h2>
-                        <h3 class="text-center"> Matt Craft</h3>
-                    </div>
-                    <div>
-                    <p class="mx-2 mt-3">Matt Craft is not a man of many words but it should be said that he is a living
-                        legened among men. Rumor has it that Matt previously pulled a sub 6 5k. Unbelievable. IKR!! 
-                        He though Ollie Zeidler how to scull why do you think he is a tank. 
-                    </p>
-                    </div> 
+    {% for leader in leadership %}
+        
+        <div class="d-flex flex-column player-card mx-1 block">
+            <div>
+                <img src= "{% thumbnail leader.picture 375x375 box=leader.cropping crop detail %}" class="mb-5" alt="">
+                <div class="position-name">
+                    <h2 class="text-center "> {{ leader.position }}</h2>
+                    <h3 class="text-center"> {{ leader.name }}</h3>
                 </div>
-            </div> 
-            <div class="d-flex flex-column player-card mx-1 block">
-                    <div>
-                        <img src="{% static 'rowingWebsiteApp/Images/Uluc.jpg' %}" alt="" class="mb-3">
-                        <div class="position-name">
-                            <h2 class="text-center"> Assistant Coach</h2>
-                            <h3 class="text-center"> Tessa Thomas</h3>
-                        </div>
-                        <div>
-                        <p class="mx-2 mt-3">Matt Craft is not a man of many words but it should be said that he is a living
-                            legened among men. Rumor has it that Matt previously pulled a sub 6 5k. Unbelievable. IKR!! 
-                            He though Ollie Zeidler how to scull why do you think he is a tank. 
-                        </p>
-                        </div> 
-                    </div>
+                <div>
+                <p class="mx-2 mt-3"> {{ leader.writeUp }}</p>
                 </div> 
-                   
+            </div>
+            <input type="hidden" value="{{ leader.staff }}"/>
         </div>
-        <hr>
-        <h1 class="text-center pt-5 py-3">
-            Officers
-        </h1>
+
+    {% endfor %}
+    </div>
+
+    <hr>
+    <h1 class="text-center pt-5 py-3">
+        Officers
+    </h1>
+
+    <div class="mx-1 my-2 center-flow flex-wrap" id="officers">   
+    </div>
+
+    <script>
+        $(document).ready(function(){
+        
+            var children = document.getElementById('coaches').children;
+
+            var coaches = document.getElementById('coaches');
+            var officers = document.getElementById('officers');
+            
+            officers.innerHTML='';
+            
+            var officersDict =[];
+        
+            for (i = 0; i < children.length ; i++) {
+                const element = children[i];
+                var value = element.getElementsByTagName("input")[0].value;
+                console.log(value);
+
+                if (value === "Officer" ){
+
+                    officersDict.push(element);
+                }
+            }
+
+            for(i = 0; i< officersDict.length; i++){
+                officers.appendChild(officersDict[i]);
+            }
+        });
+    </script>
 
     
     
