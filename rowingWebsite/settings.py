@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'image_cropping',
     'django_unused_media',
     'adminsortable2',
-    'imagekit'
+    'imagekit',
+    'sortedm2m',
 ]
 
 from easy_thumbnails.conf import Settings as thumbnail_settings
