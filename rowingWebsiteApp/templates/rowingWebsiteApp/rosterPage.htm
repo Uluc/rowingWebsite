@@ -1,10 +1,11 @@
 {% extends "rowingWebsiteApp/base.htm" %}
 {% load static %}
+{% load easy_thumbnails_tags %}
+{% load cropping %}
 
 
 {% block content %}
-
-    <head> <link href="https://fonts.googleapis.com/css?family=Teko:600&display=swap" rel="stylesheet"></head>
+    
     <style>
 
         .block {
@@ -16,7 +17,8 @@
             opacity: 0.8;
         }
         .block img {
-            max-width:375px;
+            max-width:500px;
+
 
             float: left;
         }
@@ -31,9 +33,12 @@
 
         h3 h4 { 
             color:mintcream;
+            font-family: 'Roboto Slab', serif;
         }
         h2 {
             color: #461D7C;
+            font-family: 'Roboto Slab', serif;
+            font-weight: 400;
         }
         .name{
             background: white; 
@@ -46,31 +51,175 @@
         }
         .text-set{
             font-weight: 700;
+            font-family: 'Roboto Slab', serif;
             margin-right: 5px;
         }
         .text-values{
             font-weight: 200;
+            font-family: 'Roboto Slab', serif;
         }
         .center-flow{
-
-display: flex;
-justify-content: space-around;
-}
+            display: flex;
+            justify-content: space-around;
+        }
+        .max-expand{
+            max-width: 370;
+        }
     </style>
         
-        <div class="header shadow-lg">
-            <h1 class="text-center py-3">
-                Men's Varsity
-            </h1>
-        </div>
+    <div class="header shadow-lg">
+        <h1 class="text-center py-3">
+            Men's Varsity
+        </h1>
         
-        <div class="mx-1 my-2 center-flow flex-wrap">
+    </div>
+
+    <div class="mx-lg-4 my-2 center-flow flex-wrap" id=mens-varsity-roster>
         {% for rower in rower %}
-            {% if "Mens" in rower.crew %}
-                <div class="d-flex flex-column player-card mx-1 block my-2" id="rower-card">
-                    <img src= "{{ rower.picture.url }}" alt="">
+        <div> 
+            <div class="d-flex flex-column player-card block my-2" id="rower-card" data-toggle="modal" data-target="#exampleModalCenter{{rower.id}}">
+                <img src= "{% thumbnail rower.picture 375x550 box=rower.cropping crop detail %}" alt="">
+                <div>
+                    <div class ="py-4 name">
+                        <h2 class="text-center mt-2"> {{ rower.first_name }} {{ rower.last_name }}</h2>
+                        <h5 class="text-center text-values"> {{ rower.year }}</h5>
+                    </div>
+                    <div class="py-2 d-flex flex-row max-expand">
+                        <div class="py-2 ml-3 mr-2">
+                            <h5 class="text-set"> Orientation: </h5> 
+                            <h5 class="text-set"> Hometown: </h5>    
+                            <h5 class="text-set"> Major: </h5>
+                        </div>
+                        <div class="py-2 max-expand">   
+                            <h5 class="text-values"> {{ rower.orientation }} </h5>                       
+                            <h5 class="text-values"> {{ rower.hometown }} </h5>     
+                            <div style="max-width: 220px;">           
+                                <h5 class="text-values"> {{ rower.major }} </h5>    
+                            </div>               
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" value="{{ rower.crew }}"/>
+                <input type="hidden" value="{{ rower.varsity }}"/>   
+            </div>  
+            <div class="modal fade" id="exampleModalCenter{{rower.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color: #461D7C">
+                            <h5 class="modal-title" style="color: white" id="exampleModalLongTitle">{{ rower.first_name }} {{ rower.last_name }}</h5>
+                            <button type="button" style="color: white" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <img src= "{% thumbnail rower.picture 375x550 box=rower.cropping crop detail %}" alt="" class="d-flex justify-content-around mx-auto">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>   
+                
+        {% endfor %}
+    </div>
+               
+    <div class="header shadow-lg">
+        <h1 class="text-center py-3">
+            Women's Varsity
+        </h1>
+    </div>
+
+    <div class="mx-lg-4 my-2 center-flow flex-wrap" id=womens-varsity-roster>  
+    </div>
+
+    <div class="header shadow-lg">
+        <h1 class="text-center py-3">
+            Men's Novice
+        </h1>
+    </div>
+
+    <div class="mx-lg-4 my-2 center-flow flex-wrap" id=mens-novice-roster>
+    </div>
+
+    <div class="header shadow-lg">
+        <h1 class="text-center py-3">
+            Women's Novice
+        </h1>
+    </div>
+
+    <div class="mx-lg-4 my-2 center-flow flex-wrap" id=womens-novice-roster>
+    </div>
+    
+    <script>
+        $(document).ready(function(){
+
+            var mensNovice = document.getElementById('mens-novice-roster');
+            var womensVarsity = document.getElementById('womens-varsity-roster');
+            var womensNovice = document.getElementById('womens-novice-roster');
+            var children = document.getElementById('mens-varsity-roster').children;
+            mensNovice.innerHTML = '';
+            womensVarsity.innerHTML='';
+            womensNovice.innerHTML='';
+
+            var dictWomensVar =[];
+            var dictWomensNov =[];
+            var dictMensNov =[];
+            
+            for (i = 0; i < children.length ; i++) {
+                const element = children[i];
+                var value1 = element.getElementsByTagName("input")[0].value;
+                var value2 = element.getElementsByTagName("input")[1].value;
+                console.log(value1);
+                console.log(i);
+                
+                if (value1 === "Womens" ){
+                    if(value2 === "Yes" ){
+                        dictWomensVar.push(element);
+                    }
+                    else{
+                        dictWomensNov.push(element);   
+                    }
+                }
+                else{
+                    if(value2 === "No" ){
+                        dictMensNov.push(element);
+                    }
+                }
+                
+            }
+
+            for(i = 0; i< dictWomensVar.length; i++){
+                womensVarsity.appendChild(dictWomensVar[i]);
+            }
+            for(i = 0; i< dictWomensNov.length; i++){
+                womensNovice.appendChild(dictWomensNov[i]);
+            }
+            for(i = 0; i< dictMensNov.length; i++){
+                mensNovice.appendChild(dictMensNov[i]);
+            }
+            
+            /*var rowersDict  = '{{rowers}}';
+            var rower = '{{rower}}'
+
+            var rowers= JSON.parse(rowersDict.replace(/&quot;/g,`"`));
+
+            console.log(rowers);
+            console.log(rower);
+            var mensVarsity = document.getElementById('mens-varsity-roster');
+            var mensNovice = document.getElementById('mens-novice-roster');
+            var womensVarsity = document.getElementById('womens-varsity-roster');
+            var womensNovice = document.getElementById('womens-novice-roster');
+            var coxswains = document.getElementById('coxswains');
+
+            for(i=0; i<rowers.length; i++){
+
+                /*var htmlString = `<div class="d-flex flex-column player-card mx-1 block my-2">
+                        <img src= ""  alt="">
                     <div>
-                        <h2 class="text-center py-lg-5 name"> {{ rower.name }}</h2>
+                        <p>${rowers[i].picture}</p>
+                        <div class ="py-4 name">
+                            <h2 class="text-center mt-2"> ${ rowers[i].name }</h2>
+                            <h5 class="text-center text-values"> ${ rowers[i].year }</h5>
+                        </div>
                         <div class="py-2 d-flex flex-row">
                             <div class="py-2 ml-3 mr-2">
                                 <h5 class="text-set"> Orientation: </h5> 
@@ -78,41 +227,38 @@ justify-content: space-around;
                                 <h5 class="text-set"> Major: </h5>
                             </div>
                             <div class="py-2">   
-                                <h5 class="text-values"> {{ rower.orientation }} </h5>                       
-                                <h5 class="text-values"> {{ rower.hometown }} </h5>                       
-                                <h5 class="text-values"> {{ rower.major }} </h5>            
+                                <h5 class="text-values"> ${ rowers[i].orientation }</h5>                       
+                                <h5 class="text-values"> ${ rowers[i].hometown } </h5>                       
+                                <h5 class="text-values"> ${ rowers[i].major } </h5>            
                             </div>
                         </div>
                     </div>
-                </div>   
-            {% endif%}
-        {% endfor %}
-        </div>
-       
-            
-    <div class="header shadow-lg">
-        <h1 class="text-center py-3">
-            Women's Varsity
-        </h1>
-    </div>
-    <div class="header shadow-lg">
-        <h1 class="text-center py-3">
-            Men's Novice
-        </h1>
-    </div>
-    <div class="header shadow-lg">
-        <h1 class="text-center py-3">
-            Women's Novice
-        </h1>
-    </div>
-    <div class="header shadow-lg">
-        <h1 class="text-center py-3">
-            Coxswains
-        </h1>
-    </div>
-
-    
+                </div> `;
                 
+                if(rowers[i].crew === 'Mens'){
+                    if(rowers[i].varsity === 'Yes'){
+                        $(mensVarsity).append(htmlString);
+                    }
+                    else{
+                        $(mensNovice).append(htmlString);
+                    }
+                }
+                else {
+                    if(rowers[i].varsity === 'Yes'){
+                        $(womensVarsity).append(htmlString);
+                    }
+                    else{
+                        $(womensNovice).append(htmlString);
+                    }
+                }
+                if(rowers[i].orientation === 'Coxswain'){
+                    $(coxswains).append(htmlString);
+                }
+            }*/
+            
+        });
+    </script>
+
 {% endblock content %}
 
 
