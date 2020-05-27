@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
     <title>LSU Rowing</title>
     <meta charset="utf-8">
@@ -40,10 +41,10 @@
         font-family: 'Roboto Slab', serif;
     }
     #main-view{
-    margin-right: 8%;
-    margin-left: 8%;
-    height: 100%;
-    min-width: 450px;
+        margin-right: 8%;
+        margin-left: 8%;
+        height: 100%;
+        min-width: 450px;
     }
 
     #form-group{
@@ -152,144 +153,224 @@
     background-color: #F9F9F9;
     }
 
+    h1{
+        font-size: 45px;
+        font-weight: 500;
+        font-family: 'Roboto Slab', serif;
+    }
+
+    h4, h2{
+        font-family: 'Roboto Slab', serif;
+    }
+    p{
+        font-family: 'Roboto Slab', serif;
+        font-weight: 200;
+        font-size: 15px;
+    }
+
+    .contain-text{
+            margin-left: 15%;
+            margin-right: 15%;
+            line-height: 2.5;
+
+        }
+    
+
 </style>
 
 
 <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-center shadow-md  shadow-lg ">
-                <div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0">
-                    <ul class="navbar-nav ml-auto text-center">
-                        <li class="{% if nbar == 'home' %}active{% endif %}">
-                            <a class="nav-link" href="{% url 'website-home' %}">Home</a>
-                        </li>
-                        <li class="{% if nbar == 'roster' %}active{% endif %}">
-                            <a class="nav-link" href="{% url 'website-roster' %}">Roster</a>
-                        </li>
-                        <li class="{% if nbar == 'leadership' %}active{% endif %}">
-                            <a class="nav-link" href="{% url 'website-leadership' %}">Leadership</a>
-                        </li>
-                        <li class="{% if nbar == 'recruitment' %}active{% endif %}">
-                                <a class="nav-link" href="{% url 'website-recruitment' %}">Recruitment</a>
-                            </li>
-                    </ul>
-                </div>
-                <div class="justify-content-center">
-                        <img class= "vector" src="{% static 'rowingWebsiteApp/Images/CrestFinaltest.svg' %}" alt="">
-                </div>
-                <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2">
-                    <ul class="navbar-nav mr-auto text-center">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">About Us</a>
-                        </li>
-                        <li class="{% if nbar == 'schedule' %}active{% endif %}">
-                            <a class="nav-link" href="{% url 'website-schedule' %}">Schedule</a>
-                        </li>
-                        <li class="{% if nbar == 'sponsor' %}active{% endif %}">
-                            <a class="nav-link" href="{% url 'website-sponsor' %}">Sponsor</a>
-                        </li>
-                        <li class="{% if nbar == 'photos' %}active{% endif %}">
-                                <a class="nav-link" href="{% url 'website-photogallery' %}">Photo Gallery</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        
-            {% block top %}
-            {% endblock top %}
+    
+    <nav class="navbar navbar-expand navbar-light bg-light justify-content-center shadow-md shadow-lg sticky-top" id="navigation-bar">
             
-        <div id="main-view" class="align-content-lg-center" style="background-color:#f0f0f0">
-            {% block content %}
-            {% endblock content %}
+        <div class="d-flex flex-column" id="navigation-change"></div>
+        <div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0" id="left-menus">
+            <ul class="navbar-nav ml-auto text-center">
+                <li class="{% if nbar == 'home' %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'website-home' %}">Home</a>
+                </li>
+                <li class="{% if nbar == 'roster' %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'website-roster' %}">Roster</a>
+                </li>
+                <li class="{% if nbar == 'leadership' %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'website-leadership' %}">Leadership</a>
+                </li>
+                <li class="{% if nbar == 'recruitment' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'website-recruitment' %}">Recruitment</a>
+                    </li>
+            </ul>
+        </div>
+        <div class="d-flex justify-content-around" id="logo-holder">
+                <img class= "vector" src="{% static 'rowingWebsiteApp/Images/CrestFinaltest.svg' %}" alt="">
+        </div>
+        <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2" id="right-menus"> 
+                <ul class="navbar-nav mr-auto text-center">
+                    <li class="{% if nbar == 'aboutus' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'website-aboutus' %}">About Us</a>
+                    </li>
+                    <li class="{% if nbar == 'schedule' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'website-schedule' %}">Schedule</a>
+                    </li>
+                    <li class="{% if nbar == 'sponsor' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'website-sponsor' %}">Sponsor</a>
+                    </li>
+                    <li class="{% if nbar == 'photos' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'website-photogallery' %}">Photo Gallery</a>
+                    </li>
+                </ul>
+        </div>
+        </div>
+        
+    </nav>
+    
+    {% block top %}
+    {% endblock top %}
+        
+    <div id="main-view" class="align-content-lg-center" style="background-color:#f0f0f0;">
+        {% block content %}
+        {% endblock content %}
 
-            <hr>
-            <div class="pb-xl-5">
-                <div class="text-center pt-2 ">
-                    <h2>Get in Contact with Us!</h2>
+        <hr>
+        <div class="pb-xl-5" style="background-color:#f0f0f0;">
+            
+            <div class="text-center pt-2 ">
+                <h2>Get in Contact with Us!</h2>
+            </div>
+            
+            <div class="row m-xl-5">
+
+                <div class="text-dark col-md align-self-center">
+                    
+                    <div class="row mt-n5">
+                        <p class="p-5 pb-n5">We have practice every Monday-Friday from 5:45am - 7:00am, why not join us and see how it
+                        goes! </p>
+                    </div>
+
+                    <div class="row justify-content-center">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3440.6503037185644!2d-91.173418!3d30.417662!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8626a6d835c0790b%3A0xba1d8265a4d095cc!2s3355%20Dalrymple%20Dr%2C%20Baton%20Rouge%2C%20LA%2070802!5e0!3m2!1sen!2sus!4v1587460010960!5m2!1sen!2sus" width="400" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0" class="padding: p-5;"></iframe>
+                    </div>
+
                 </div>
-                <div class="row m-xl-5">
-    
-                    <div class="text-dark col-md align-self-center">
-                        <div class="row">
-                            <p>We have practice every Monday-Friday from 5:45am - 7:00am, why not join us and see how it
-                            goes! </p>
-                        </div>
-                        <div class="row justify-content-center">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3440.6503037185644!2d-91.173418!3d30.417662!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8626a6d835c0790b%3A0xba1d8265a4d095cc!2s3355%20Dalrymple%20Dr%2C%20Baton%20Rouge%2C%20LA%2070802!5e0!3m2!1sen!2sus!4v1587460010960!5m2!1sen!2sus" width="400" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-                        </div>
-                    </div>
-    
-                    <div class="col-md">
-                        <h6 class="mb-4">Reach us on Social Media</h6>
-                        <ul class="social-network social-circle">
-                                <li><a href="https://www.facebook.com/lsurowing/" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="https://twitter.com/lsurowing?lang=en" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="https://www.instagram.com/lsu.rowing/?hl=en" class="icoInstagram" title="Instagram"><i class="fa fa-instagram"></i></a></li>
-                        </ul>
 
-                        <h6 class="mt-4">Send us a Message</h6>
-                        <form>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="form_name">Firstname:</label>
-                                        <input id="form_name" type="text" name="name" class="form-control" placeholder="Firstname" required="required" data-error="Firstname is required.">
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="form_lastname">Lastname:</label>
-                                        <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Lastname" required="required" data-error="Lastname is required.">
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="form_email">Email:</label>
-                                        <input id="form_email" type="email" name="email" class="form-control" placeholder="Example@email.com" required="required" data-error="Valid email is required.">
-                                        <div class="help-block with-errors"></div>
-                                    </div>
+                <div class="col-md m-3">
+                    <h6 class="mb-4">Reach us on Social Media</h6>
+                    <ul class="social-network social-circle">
+                            <li><a href="https://www.facebook.com/lsurowing/" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://twitter.com/lsurowing?lang=en" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="https://www.instagram.com/lsu.rowing/?hl=en" class="icoInstagram" title="Instagram"><i class="fa fa-instagram"></i></a></li>
+                    </ul>
+
+                    <h6 class="mt-4">Send us a Message</h6>
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="form_name">Firstname:</label>
+                                    <input id="form_name" type="text" name="name" class="form-control" placeholder="Firstname" required="required" data-error="Firstname is required.">
+                                    <div class="help-block with-errors"></div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="form_message">Message:</label>
-                                        <textarea id="form_message" name="message" class="form-control" placeholder="Insert Message Here" rows="4" required="required" data-error="Please, leave us a message."></textarea>
-                                        <div class="help-block with-errors"></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <input type="submit" class="btn btn-success btn-send" value="Send message">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="form_lastname">Lastname:</label>
+                                    <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Lastname" required="required" data-error="Lastname is required.">
+                                    <div class="help-block with-errors"></div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="form_email">Email:</label>
+                                    <input id="form_email" type="email" name="email" class="form-control" placeholder="Example@email.com" required="required" data-error="Valid email is required.">
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md">
+                                <div class="form-group">
+                                    <label for="form_message">Message:</label>
+                                    <textarea id="form_message" name="message" class="form-control" placeholder="Insert Message Here" rows="4" required="required" data-error="Please, leave us a message."></textarea>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <input type="submit" class="btn btn-success btn-send" value="Send message" style="background: #461D7C; color; v">
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
     
 </body>
+
 <footer class="mainfooter" role="contentinfo">
     <div class="footer-middle">
     <div class="container">
         
-            <div class="footer-pad text-center">
-            <h4>Disclaimer</h4>
-            <p>"The statements and opinions included in the LSU Rowing Club pages are those of the LSU Rowing Club only. 
-            Any statements and opinions included in these pages are not those of LSU or the LSU Board of Supervisors."<p>
-            </div>
-        
-        <div class="row">
-            <div class="col-md-12 copy">
-                <p class="text-center">&copy; Copyright 2020 - LSU Rowing.  All rights reserved.</p>
-            </div>
+        <div class="footer-pad text-center">
+        <h4>Disclaimer</h4>
+        <p style="line-height: 2;">"The statements and opinions included in the LSU Rowing Club pages are those of the LSU Rowing Club only. 
+        Any statements and opinions included in these pages are not those of LSU or the LSU Board of Supervisors."<p>
         </div>
     
-    
-    </div>
+    <div class="row">
+        <div class="col-md-12 copy">
+            <p class="text-center">&copy; Copyright 2020 - LSU Rowing.  All rights reserved.</p>
+        </div>
     </div>
 </footer>
+
 </html>
+
+<script>
+
+    function windowAdjustment() {
+        
+        width = $(window).width(); 
+
+        var leftMenu = document.getElementById("left-menus");
+        var rightMenu = document.getElementById("right-menus");
+        var logoHolder = document.getElementById("logo-holder")
+        var navigationBar = document.getElementById("navigation-change");
+        var navBar = document.getElementById("navigation-bar")
+        
+        if (width <= 850) {
+            navigationBar.appendChild(logoHolder);
+            navigationBar.appendChild(leftMenu);
+            navigationBar.appendChild(rightMenu);
+            console.log($(window).width());
+        }
+        
+        if(width > 850) {
+            navBar.appendChild(leftMenu);
+            navBar.appendChild(logoHolder);
+            navBar.appendChild(rightMenu);
+
+        }
+    }
+
+    $(window).scroll(function() {    
+            // found from
+            // https://stackoverflow.com/questions/12558311/add-remove-class-with-jquery-based-on-vertical-scroll
+            var scrollTop = $(window).scrollTop();
+            if (scrollTop < 200) {
+                maxHeight = 150;
+            } else if (scrollTop > 400) {
+                maxHeight = 75;
+            } else {
+                maxHeight = 150 - 75 * ((scrollTop - 200)) / 200;
+            }
+            $('.vector').css({
+                'max-height': maxHeight + "px"
+            });
+
+    });
+
+    $(window).resize(windowAdjustment);
+    $(document).ready(windowAdjustment);
+
+</script>
