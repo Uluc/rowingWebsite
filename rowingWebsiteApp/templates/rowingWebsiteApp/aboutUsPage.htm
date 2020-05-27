@@ -11,16 +11,22 @@
             height:75vh;
             width: 100%;
             background-position: center;
-            background-attachment: fixed;
             background-repeat: no-repeat;
             background-size: cover;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-        .text-center{
-            line-height: 3;
+        
+        p{
+            line-height: 2;
         }
+
+        .pstyle {
+            -webkit-columns: 2 200px;
+            -moz-columns: 2 200px;
+            columns: 2 200px;
+        }   
 
     </style>
 
@@ -32,7 +38,6 @@
 
 {% block content %}
 
-    <h1>jkfa,sjfnk</h1>
     <div class="mt-n2">
         {% for sections in aboutText %}
             <div>
@@ -40,30 +45,21 @@
                     <h1>{{sections.title}}</h1>
                 </div>
 
-                <div class="mx-5">
-                    {% if forloop.counter|divisibleby:2 %}
-
-                    <div class="row p-xl-5">
-                        <div class="text-dark col-md align-self-center">
-                            <p class="text-center">{{sections.text}}
-                            </p>
-                        </div>
-                        <div class="col-md">
+                <div class="mx-5 mt-xl-5">
+                        
+                    <div class="col-md pstyle">
+                        <p>{{sections.text|linebreaks}}
+                        </p>
+                    </div>  
+                    
+                    <div class="col-md d-flex flex-wrap">
+                        <div class="col-md mt-3">
                             <img class="img-fluid shadow-md" src="{{sections.image.url}}" alt="">
                         </div>
-                    </div>
-                    </div>
-                    {% else %}
-                    <div class="row p-xl-5">
-                        <div class="col-md">
-                            <img class="img-fluid shadow-md" src="{{sections.image.url}}" alt="">
-                        </div>
-                        <div class="text-dark col-md align-self-center">
-                            <p class="text-center">{{sections.text}}
-                            </p>
-                        </div>   
-                    </div>
-                    {% endif %}
+                        <div class="col-md mt-3">
+                            <img class="img-fluid shadow-md" src="{{sections.image2.url}}" alt="">
+                        </div>     
+                    </div> 
                 </div>
 
             </div>
@@ -73,5 +69,6 @@
             <hr>
             {% endif %}
         {% endfor %}
+    </div>
 
 {% endblock content %}
