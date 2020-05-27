@@ -13,7 +13,7 @@ urlpatterns = [
     path('recruitment/', views.recruitment, name='website-recruitment'),
     path('leadership/', views.leadership, name='website-leadership'),
     path('photogallery/', views.photogallery, name='website-photogallery'),
-
+    path('aboutus/',views.aboutus, name='website-aboutus'),
 ]
 
 if settings.DEBUG:
