@@ -11,6 +11,7 @@ from sortedm2m.fields import SortedManyToManyField
 from django.core.files.base import ContentFile
 from django.utils.html import format_html
 from django.utils.html import escape
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 
@@ -70,7 +71,7 @@ class Race(models.Model):
     location= models.CharField(max_length=64, help_text=("Event address ex: 3355 Dalrymple Dr, Baton Rouge, LA 70802"))
     date = models.DateField(null=True, blank=True)
     semester = models.CharField(max_length=64, choices=SEMESTER)
-    results = models.CharField(max_length=256, default='-', help_text=("Put the link to regatta central here once"))
+    results = models.TextField(help_text=("List Event Results Here"),null=True, blank=True)
 
     class Meta:
         ordering = ['date']
@@ -155,6 +156,23 @@ class HomePage(models.Model):
     class Meta:
         verbose_name_plural = "Home Page Entries"
 
+    def __str__(self):
+        return self.title
+
+class AboutPage(models.Model):
+    
+    title = models.CharField(max_length=32)
+    text = models.TextField(help_text=("This will be the text that gets displayed"))
+    image = models.ImageField(upload_to='template_photos')
+    image2 = models.ImageField(upload_to='template_photos')
+    image3 = models.ImageField(upload_to='template_photos')
+
+    class Meta:
+        verbose_name_plural = "About Us Page Entries"
+
+    def __str__(self):
+        return self.title
+
 class RecruitmentPage(models.Model):
 
     title = models.CharField(max_length=32)
@@ -173,4 +191,7 @@ class SponsorPage(models.Model):
 
     class Meta:
         verbose_name_plural = "Sponsor Page Entries"
+
+    def __str__(self):
+        return self.title
 
