@@ -1,9 +1,9 @@
 # .gitignore
 # Project files and directories
-/myproject/local_settings.py
-/myproject/static/
-/myproject/tmp/
-/myproject/media/
+/rowingWebsite/local_settings.py
+/rowingWebsite/static/
+/rowingWebsite/tmp/
+/rowingWebsite/media/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
