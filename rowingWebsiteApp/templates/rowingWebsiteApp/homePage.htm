@@ -19,16 +19,7 @@
             align-items: center;
         }
         .text-center{
-            line-height: 3;
-        }
-
-        h1{
-            font-size: 45px;
-            font-family: 'Roboto Slab', serif;
-        }
-        p{
-            font-family: 'Roboto Slab', serif;
-            font-weight: 400;
+            line-height: 2.4;
         }
 
     </style>
@@ -41,66 +32,45 @@
 
 {% block content %}
 
+    <div class="mt-n2">
+        {% for sections in homeText %}
+            <div>
+                <div class="text-dark text-center pt-5">
+                    
+                </div>
 
+                <div class="mx-5">
+                    {% if forloop.counter|divisibleby:2 %}
 
-    <div id="main-view" class="mt-n2">
-        <div>
-            <div class="text-dark text-center pt-5">
-                <h1>Who Are We?</h1>
-            </div>
-            <div class="row p-xl-5">
-                <div class="text-dark col-md align-self-center">
-                    <p class="text-center">Each person who walks on our dock has a different story of how they got there but we
-                    all have one thing in common, dedication.  Most of us didn't know the first thing about rowing when we started but we have grown together as a crew and as a team to compete in
-                    regattas across the south. LSU Rowing aims to employ our mission statement with every
-                    practice and regatta we attend.
-                    </p>
-                </div>
-                <div class="col-md">
-                    <img class="img-fluid shadow-md" src="{% static '/rowingWebsiteApp/Images/Devin-Sunrise.JPG'%}" alt="">
-                </div>
-            </div>
-        </div>
-        <hr>
-        <div>
-            <div class="text-center pt-5">
-                <h1>What is Rowing?</h1>
-            </div>
-            <div class="row p-xl-5">
-                <div class="text-dark col-md">
-                    <img class="img-fluid shadow-md" src="{% static '/rowingWebsiteApp/Images/Boat_Inside.JPG'%}" alt="">
-                </div>
-                <div class="text-dark col-md align-self-center">
-                    <p class="text-center">Each person who walks on our dock has a different story of how they got there but we
-                        all have one thing in common, dedication.  Most of us didn't know the first thing about
-                        rowing when we started but we have grown together as a crew and as a team to compete in
-                        regattas across the south. LSU Rowing aims to employ our mission statement with every
-                        practice and regatta we attend.
-                    </p>
+                    <div class="row p-xl-5">
+                        <div class="text-dark col-md align-self-center">
+                            <h2 class="text-center">{{sections.title}}</h2>
+                            <p class="text-center">{{sections.text}}</p>
+                        </div>
+                        <div class="col-md">
+                            <img class="img-fluid shadow-md" src="{{sections.image.url}}" alt="">
+                        </div>
+                    </div>
+                    </div>
+                    {% else %}
+                    <div class="row p-xl-5">
+                        <div class="col-md">
+                            <img class="img-fluid shadow-md" src="{{sections.image.url}}" alt="">
+                        </div>
+                        <div class="text-dark col-md align-self-center">
+                            <h2 class="text-center">{{sections.title}}</h2>
+                            <p class="text-center">{{sections.text}}</p>
+                        </div>   
+                    </div>
+                    {% endif %}
                 </div>
 
             </div>
-        </div>
 
-        <hr >
+            {% if forloop.last %}
+            {% else %}
+            <hr>
+            {% endif %}
+        {% endfor %}
 
-        <div>
-            <div class="text-center pt-5">
-                <h1>Interested In Joining?</h1>
-            </div>
-            <div class="row p-xl-5">
-                <div class="text-dark col-md align-self-center">
-                    <p class="text-center">Each person who walks on our dock has a different story of how they got there but we
-                        all have one thing in common, dedication.  Most of us didn't know the first thing about
-                        rowing when we started but we have grown together as a crew and as a team to compete in
-                        regattas across the south. LSU Rowing aims to employ our mission statement with every
-                        practice and regatta we attend.
-                    </p>
-                </div>
-                <div class="text-dark col-md">
-                    <img class="img-fluid shadow-lg" src="{% static '/rowingWebsiteApp/Images/Join.JPG'%}" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
 {% endblock content %}
