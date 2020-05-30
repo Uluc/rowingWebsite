@@ -137,7 +137,9 @@ class Picture(models.Model):
 class Gallery(models.Model):
     title = models.CharField(max_length=64, help_text=("Name for the gallery"))
     date = models.DateField(help_text=("Date the event occured"))
+    full_gallery_link = models.URLField(max_length=200, help_text="place google drive url here for the whole album", default='')
     images = SortedManyToManyField(Picture)
+    
 
     def __str__(self):
         return self.title
@@ -154,7 +156,7 @@ class HomePage(models.Model):
     image = models.ImageField(upload_to='template_photos')
 
     class Meta:
-        verbose_name_plural = "Home Page Entries"
+        verbose_name_plural = " Home Page Entries"
 
     def __str__(self):
         return self.title
@@ -168,7 +170,7 @@ class AboutPage(models.Model):
     image3 = models.ImageField(upload_to='template_photos')
 
     class Meta:
-        verbose_name_plural = "About Us Page Entries"
+        verbose_name_plural = " About Us Page Entries"
 
     def __str__(self):
         return self.title
@@ -180,7 +182,21 @@ class RecruitmentPage(models.Model):
     questionaire_link = models.CharField(max_length=128)
 
     class Meta:
-        verbose_name_plural = "Recruitment Page Entries"
+        verbose_name_plural = " Recruitment Page Entries"
+
+    def __str__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        self.__class__.objects.exclude(id=self.id).delete()
+        super(RecruitmentPage, self).save(*args, **kwargs)
+
+    @classmethod
+    def load(cls):
+        try:
+            return cls.objects.get()
+        except cls.DoesNotExist:
+            return cls()
 
 class SponsorPage(models.Model):
     title = models.CharField(max_length=32)
@@ -190,8 +206,19 @@ class SponsorPage(models.Model):
     image = models.ImageField(upload_to='template_photos')
 
     class Meta:
-        verbose_name_plural = "Sponsor Page Entries"
+        verbose_name_plural = " Sponsor Page Entries"
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        self.__class__.objects.exclude(id=self.id).delete()
+        super(SponsorPage, self).save(*args, **kwargs)
+
+    @classmethod
+    def load(cls):
+        try:
+            return cls.objects.get()
+        except cls.DoesNotExist:
+            return cls()
 
