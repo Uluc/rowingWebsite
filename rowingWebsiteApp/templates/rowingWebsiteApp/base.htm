@@ -24,6 +24,8 @@
 </head>
 
 <style>
+
+
     body{
         background-image: url("{% static 'rowingWebsiteApp/Images/background.png' %}");
         background-size: 100%;
@@ -162,6 +164,9 @@
     h4, h2{
         font-family: 'Roboto Slab', serif;
     }
+    h2{
+        font-size: 30px;
+    }
     p{
         font-family: 'Roboto Slab', serif;
         font-weight: 200;
@@ -174,6 +179,7 @@
             line-height: 2.5;
 
         }
+
     
 
 </style>
@@ -261,7 +267,7 @@
                     </ul>
 
                     <h6 class="mt-4">Send us a Message</h6>
-                    <form>
+                    <!--<form>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -299,7 +305,31 @@
                                 <input type="submit" class="btn btn-success btn-send" value="Send message" style="background: #461D7C; color; v">
                             </div>
                         </div>
+                    </form>-->
+                    <form action="{% url 'website-home' %}" method="post">
+                       {% csrf_token  %}
+                        <div class="row">
+                            
+                            <div class="col-lg-6">
+                                <input type="text" name="message-name" class="form-control mb-30" 
+                                placeholder="Your Name" required="required" data-error="Name is required.">
+                            </div>
+                            
+                            <div class="col-lg-6">
+                                <input type="email" name="message-email" class="form-control mb-30" 
+                                placeholder="Your Email" required="required" data-error="Valid email is required.">
+                            </div>
+                            
+                            <div class="col-12 my-4">
+                                <textarea name="message" class="form-control" placeholder="Insert Message Here" rows="4" required="required" data-error="Please, leave us a message."></textarea>
+                            </div>
+                            
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-success btn-send">Send Message</button>
+                            </div>
+                        </div>
                     </form>
+
                 </div>
             </div>
         </div>
@@ -313,7 +343,7 @@
         
         <div class="footer-pad text-center">
         <h4>Disclaimer</h4>
-        <p style="line-height: 2;">"The statements and opinions included in the LSU Rowing Club pages are those of the LSU Rowing Club only. 
+        <p style="line-height: 2">"The statements and opinions included in the LSU Rowing Club pages are those of the LSU Rowing Club only. 
         Any statements and opinions included in these pages are not those of LSU or the LSU Board of Supervisors."<p>
         </div>
     
@@ -342,7 +372,7 @@
             navigationBar.appendChild(logoHolder);
             navigationBar.appendChild(leftMenu);
             navigationBar.appendChild(rightMenu);
-            console.log($(window).width());
+            
         }
         
         if(width > 850) {
