@@ -1,18 +1,36 @@
 {% extends "rowingWebsiteApp/base.htm" %}
 {% load static %}
 
+{% block top %}
+    <style>
+
+        .bg{
+        background-image: url("{% static 'rowingWebsiteApp/Images/Womens4.jpg' %}");
+        height:50vh;
+        width: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    
+    </style>
+
+    <div class="bg">
+
+    </div>
+
+
+{% endblock top %}
 
 {% block content %}
-
-    <head> 
-        <link href="https://fonts.googleapis.com/css?family=Teko:600&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap" rel="stylesheet">
-    </head>
 
     <style>
      
         .header > h1{
-            font-family: 'Open Sans', sans-serif;
             color: #FDD023;
             font-size: 55px;
             background-color: #461D7C;
@@ -27,38 +45,47 @@
             
         }
         .center-text{
-            background: #FDD023;
-            color: #461D7C;
+            background: white;
+            border-style: solid;
+            border-width: 0px;
+            border-bottom-width: 2px;
+            border-color: #461D7C;
             align-content: center;
             text-align: center;
             align-self: center;
         }
 
-
         .regatta-card > h1{
-            font-size: 45px;
-            font-weight: 500;
+            font-size: 40px;
+          
+            font-weight: 400;
             font-family: 'Roboto Slab', serif;
             
         }
         .regatta-card > h2{
-            font-size: 23px;
+            font-size: 20px;
             font-weight: 500;
             font-family: 'Roboto Slab', serif;
+            color: #461D7C;
             
         }
+
+        h5, h6{
+            font-weight: 230;
+            font-family: 'Roboto Slab', serif;
+        } 
+
         .regatta-card > h3{
             font-weight: 230;
             font-family: 'Roboto Slab', serif;
+            color: #461D7C;
         }
-        .regatta-card > h6{
-            font-weight: 230;
-            font-family: 'Roboto Slab', serif;
-        }
+ 
 
     </style>
 
     <div class="flex-column">
+        
         <div class="header shadow-lg">
             <h1 class="text-center py-3">
                 Fall Schedule
@@ -66,9 +93,40 @@
         </div>
         <div id="fall-races">
             
-        </div>
+            {% for race in races %}    
+                <div class="regatta-card my-2 mx-2 ">
+                
+                    {% if race.date %}
+                        <h2 class="center-text py-1">{{race.date|date:"l, F d, Y"}}</h2>
+                    {% else %}
+                        <h2 class="center-text py-1">To Be Announced</h2>
+                    {% endif %}
+                        <h1 class="text-center my-1">{{race.name}}</h1>
 
-        <!---<input type="button" onclick="findChildren()" value="Click it" />-->
+                    <h3 class="text-center m-1 my-2">{{race.location}}</h3>
+                    
+                    {% if race.results %}
+                        <h6 class="text-center" ><a href="#!" class="inactiveLink" id="anchor{{race.id}}">Recap</a></h6>
+                    {% endif %}
+                    
+
+                    <div id="results{{race.id}}" class="my-3 mx-3" style="display: none;">
+                        <hr>
+                        <h5 class="text-center">
+                            {{race.results|linebreaks }}
+                        </h5>
+                    </div>
+
+                    <input type="hidden" value={{ race.semester }}>
+
+                </div>
+            {% endfor %}   
+ 
+        </div>
+       
+        <div id=toBeAnnouncedSoonFall>
+            <h2 class="text-center py-5">Our schedule is not currently set fot the fall semester please visit at a later date.</h2>
+        </div>
 
         <div class="header shadow-lg">
             <h1 class="text-center py-3">
@@ -78,33 +136,79 @@
         <div id="spring-races">
 
         </div>
+        <div id=toBeAnnouncedSoonSpring>
+            <h2 class="text-center py-5">Our schedule is not currently set fot the spring semester please visit at a later date.</h2>
+        </div>
+       
         
     </div>
 
-    <script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   
+   <script>
         $(document).ready(function(){
-            var racesDict  = '{{races}}';
             
-            var races = JSON.parse(racesDict.replace(/&quot;/g,`"`));
-            var spring = document.getElementById('spring-races');
-            var fall = document.getElementById('fall-races');
+            var children = document.getElementById('fall-races').children;
 
-            for(i=0; i<races.length; i++){
-                var htmlString = `<div class="regatta-card my-2 mx-2 ">
-                    <h2 class="center-text py-2">${races[i].date}</h2>
-                    <h1 class="text-center my-2">${races[i].name}</h1>
-                    <h3 class="text-center m-3">${races[i].location}</h3>
-                    <h6 class="text-center"><a href="#">Recap</a></h6>
-                </div>`;
-                if(races[i].semester === 'Fall'){
-                    $(fall).html(htmlString);
-                }
-                else{
-                    $(spring).html(htmlString);
+            var fall = document.getElementById('fall-races');
+            var spring = document.getElementById('spring-races');
+            var notReady = document.getElementById('toBeAnnouncedSoon');
+            
+            spring.innerHTML='';
+
+            var racesDict =[];
+        
+
+            for (i = 0; i < children.length ; i++) {
+                const element = children[i];
+                var value = element.getElementsByTagName("input")[0].value;
+
+                if (value === "Spring" ){
+
+                    racesDict.push(element);
                 }
             }
-            console.log(races);
-        });
+
+            for(i = 0; i< racesDict.length; i++){
+                spring.appendChild(racesDict[i]);
+            }
+
+            if ($("#fall-races").is(':empty')) {
+                $('#toBeAnnouncedSoonFall').show();  
+            }
+            else{
+                $('#toBeAnnouncedSoonFall').hide();  
+            }
+            
+            if (spring.innerHTML === '') {
+                $('#toBeAnnouncedSoonSpring').show();  
+            }
+            else{
+                $('#toBeAnnouncedSoonSpring').hide();  
+            }
+            
+            
+
+
+            $('a').click(function() { 
+                var id = $(this).attr('id');
+                console.log(id);
+                newid = "results" + id.substr(6);
+                console.log(newid);
+
+                $('#'+ newid +'').slideToggle(500);
+            });
+
+
+        }); 
+    
+
+
+
+        
+
+
     </script>
 
         
