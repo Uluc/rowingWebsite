@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.admin import sites
-from .models import Rower, Race, Leadership, Event, Sponsor, Picture, Gallery, HomePage, SponsorPage, RecruitmentPage, AboutPage
+from .models import Rower, Race, Leadership, Event, Sponsor, Picture, Gallery, HomePage, SponsorPage, RecruitmentPage, AboutPage, PageBanners
 from image_cropping.admin import ImageCroppingMixin
 from adminsortable2.admin import SortableAdminMixin
 from imagekit.admin import AdminThumbnail
@@ -28,7 +28,7 @@ class MyModelAdmin(ImageCroppingMixin, admin.ModelAdmin):
 class AdminGallery(ImageCroppingMixin, admin.ModelAdmin):
     pass
 
-class MyModelAdminSorting(SortableAdminMixin, ImageCroppingMixin, admin.ModelAdmin):
+class MyModelAdminSorting(SortableAdminMixin, admin.ModelAdmin):
     list_display = ['name', 'position', 'staff']
 
 class FancyAdmin(admin.ModelAdmin):
@@ -45,9 +45,33 @@ class RecruitmentAdmin(NoDeleteAdminMixin, admin.ModelAdmin):
 class SponsorAdmin(NoDeleteAdminMixin, admin.ModelAdmin):
     pass
 
+class BannerAdmin(admin.ModelAdmin):
+    
+    list_display = ['title','recruitment_display' , 'about_display', 'schedule_display', 'sponsor_display']
+    
+
+    recruitment_display = AdminThumbnail(image_field='image_thumbnail_recruitment')
+    recruitment_display.short_description = 'Recruitment Page Banner'
+    
+    about_display = AdminThumbnail(image_field='image_thumbnail_about')
+    about_display.short_description = 'About Page Banner'
+    
+    schedule_display = AdminThumbnail(image_field='image_thumbnail_schedule')
+    schedule_display.short_description = 'Schedule Page Banner'
+
+    sponsor_display = AdminThumbnail(image_field='image_thumbnail_sponsor')
+    sponsor_display.short_description = 'Sponsor Page Banner'
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+    def has_add_permission(self, request):
+        return False
+
+
 admin.site.register(HomePage)
 admin.site.register(SponsorPage, SponsorAdmin)
 admin.site.register(RecruitmentPage, RecruitmentAdmin)
+admin.site.register(PageBanners, BannerAdmin)
 admin.site.register(AboutPage)
 admin.site.register(Sponsor)
 admin.site.register(Rower, MyModelAdmin)
