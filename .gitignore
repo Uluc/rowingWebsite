@@ -42,5 +42,4 @@ docs/_build/
 
 # PyBuilder
 target/
-rowingWebsite/urls.py
-rowingWebsite/settings.py
+
