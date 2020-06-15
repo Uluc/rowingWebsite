@@ -11,13 +11,11 @@
         .block {
             overflow: hidden;
             width: 26vw;
-
         }
         .block img {
             width: 26vw;
             float: left;
         }
-
         .header > h1{
             font-family: 'Open Sans', sans-serif;
             background-color: #461D7C;
@@ -25,7 +23,6 @@
             font-size: 50px;
             font-family: 'Teko', sans-serif;
         }
-
         h3 h4 { 
             color:mintcream;
             font-family: 'Roboto Slab', serif;
@@ -36,7 +33,9 @@
             font-family: 'Roboto Slab', serif;
             font-weight: 400;
         }
-        
+        h5{
+            font-size: 14px;
+        }
         .name{
             background: white; 
         }
@@ -104,7 +103,6 @@
         <h1 class="text-center py-3">
             Men's Varsity
         </h1>
-        
     </div>
 
     <div class="mx-lg-4 my-2 center-flow flex-wrap" id=mens-varsity-roster>
@@ -117,13 +115,13 @@
                         <h2 class="text-center mt-2"> {{ rower.first_name }} {{ rower.last_name }}</h2>
                         <h5 class="text-center text-values"> {{ rower.year }}</h5>
                     </div>
-                    <div class="py-2 d-flex flex-row max-expand">
-                        <div class="py-2 ml-3 mr-2">
+                    <div class="py-1 d-flex flex-row max-expand">
+                        <div class="py-1 ml-3 mr-2">
                             <h5 class="text-set"> Orientation: </h5> 
                             <h5 class="text-set"> Hometown: </h5>    
                             <h5 class="text-set"> Major: </h5>
                         </div>
-                        <div class="py-2 max-expand" style="height: 100px">   
+                        <div class="py-1 max-expand" style="height: 80px">   
                             <h5 class="text-values"> {{ rower.orientation }} </h5>                       
                             <h5 class="text-values"> {{ rower.hometown }} </h5>     
                             <div style="max-width: 220px;">           

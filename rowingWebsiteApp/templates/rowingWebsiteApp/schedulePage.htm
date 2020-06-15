@@ -1,99 +1,37 @@
 {% extends "rowingWebsiteApp/base.htm" %}
 {% load static %}
 
+
 {% block top %}
-    <style>
 
-        .bg{
-        background-image: url("{% static 'rowingWebsiteApp/Images/Womens4.jpg' %}");
-        height:50vh;
-        width: 100%;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    
-    </style>
-
-    <div class="bg">
-
-    </div>
-
+    {% for banners in banner %}
+        <div class="image-container">
+            <h1 class="titles">{{banners.schedule_page_title}}</h1>
+            <div class="bg" style= "background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), 
+                                                                url('{{banners.schedule_Banner.url}}'); "> </div>
+        </div>
+    {% endfor %}
 
 {% endblock top %}
 
 {% block content %}
 
-    <style>
-     
-        .header > h1{
-            color: #FDD023;
-            font-size: 55px;
-            background-color: #461D7C;
-            font-family: 'Teko', sans-serif;
-        }
-        .regatta-card{
-            border-style:solid;
-            border-width: 1px;
-            border-color: gray;
-            height: auto;
-            background: white
-            
-        }
-        .center-text{
-            background: white;
-            border-style: solid;
-            border-width: 0px;
-            border-bottom-width: 2px;
-            border-color: #461D7C;
-            align-content: center;
-            text-align: center;
-            align-self: center;
-        }
-
-        .regatta-card > h1{
-            font-size: 40px;
-          
-            font-weight: 400;
-            font-family: 'Roboto Slab', serif;
-            
-        }
-        .regatta-card > h2{
-            font-size: 20px;
-            font-weight: 500;
-            font-family: 'Roboto Slab', serif;
-            color: #461D7C;
-            
-        }
-
-        h5, h6{
-            font-weight: 230;
-            font-family: 'Roboto Slab', serif;
-        } 
-
-        .regatta-card > h3{
-            font-weight: 230;
-            font-family: 'Roboto Slab', serif;
-            color: #461D7C;
-        }
- 
-
-    </style>
+    <head>
+        <link rel="stylesheet" href="{% static '/rowingWebsiteApp/CSS/schedulePage.css' %}">
+    </head>
 
     <div class="flex-column">
         
-        <div class="header shadow-lg">
+        <div class="header">
             <h1 class="text-center py-3">
                 Fall Schedule
             </h1>
         </div>
+
         <div id="fall-races">
             
-            {% for race in races %}    
+            {% for race in races %}
+                {% if race.public %}
                 <div class="regatta-card my-2 mx-2 ">
                 
                     {% if race.date %}
@@ -120,15 +58,17 @@
                     <input type="hidden" value={{ race.semester }}>
 
                 </div>
-            {% endfor %}   
+                     
+                {% endif %}
+            {% endfor %}  
  
         </div>
        
         <div id=toBeAnnouncedSoonFall>
-            <h2 class="text-center py-5">Our schedule is not currently set fot the fall semester please visit at a later date.</h2>
+            <h2 class="text-center py-5">Our schedule is not currently set for the fall semester please visit at a later date.</h2>
         </div>
 
-        <div class="header shadow-lg">
+        <div class="header ">
             <h1 class="text-center py-3">
                 Spring Schedule
             </h1>
@@ -137,7 +77,7 @@
 
         </div>
         <div id=toBeAnnouncedSoonSpring>
-            <h2 class="text-center py-5">Our schedule is not currently set fot the spring semester please visit at a later date.</h2>
+            <h2 class="text-center py-5">Our schedule is not currently set for the spring semester please visit at a later date.</h2>
         </div>
        
         
@@ -156,25 +96,31 @@
             var notReady = document.getElementById('toBeAnnouncedSoon');
             
             spring.innerHTML='';
-
-            var racesDict =[];
-        
-
+            //fall.innerHTML='';
+            var racesDictSpring =[];
+            var fallRace = false;
+            
             for (i = 0; i < children.length ; i++) {
                 const element = children[i];
                 var value = element.getElementsByTagName("input")[0].value;
 
                 if (value === "Spring" ){
 
-                    racesDict.push(element);
+                    racesDictSpring.push(element);
                 }
+                if (value === "Fall" ){
+
+                    fallRace = true;
+                }
+                
             }
 
-            for(i = 0; i< racesDict.length; i++){
-                spring.appendChild(racesDict[i]);
+            for(i = 0; i< racesDictSpring.length; i++){
+                spring.appendChild(racesDictSpring[i]);
             }
+           
 
-            if ($("#fall-races").is(':empty')) {
+            if (!fallRace) {
                 $('#toBeAnnouncedSoonFall').show();  
             }
             else{
@@ -188,8 +134,6 @@
                 $('#toBeAnnouncedSoonSpring').hide();  
             }
             
-            
-
 
             $('a').click(function() { 
                 var id = $(this).attr('id');
@@ -202,12 +146,6 @@
 
 
         }); 
-    
-
-
-
-        
-
 
     </script>
 

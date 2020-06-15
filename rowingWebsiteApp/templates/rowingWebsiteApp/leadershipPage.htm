@@ -15,10 +15,6 @@
         .block {
             overflow: hidden;
         }
-        .block:hover{
-            color: black;
-            opacity: 0.8;
-        }
         .block img {
             max-width: 350px;
             float: left;
@@ -30,12 +26,12 @@
         .position-name{
         }
         .position-name > h3{
-            
+            font-size: 15px;
             font-weight: 300;
         }
         .position-name > h2{
-            
-            font-weight: 600;
+            font-size: 19px;
+            font-weight: 400;
 
         }
         .player-card{
@@ -63,7 +59,7 @@
         
         <div class="d-flex flex-column player-card mx-1 block">
             <div>
-                <img src= "{% thumbnail leader.picture 375x375 box=leader.cropping crop detail %}" class="mb-5" alt="">
+                <img src= "{% thumbnail leader.picture 375x375 crop detail %}" class="mb-5" alt="">
                 <div class="position-name">
                     <h2 class="text-center "> {{ leader.position }}</h2>
                     <h3 class="text-center"> {{ leader.name }}</h3>

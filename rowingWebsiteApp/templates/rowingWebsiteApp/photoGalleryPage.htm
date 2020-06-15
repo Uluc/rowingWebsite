@@ -3,9 +3,14 @@
 {% load easy_thumbnails_tags %}
 {% load cropping %}
 
-{% block content %}
+{% block contentHome %}
 <style>
 
+    .carousel-indicators li {
+        width: 10px;
+        height: 10px;
+        border-radius: 100%;
+    }   
     h1{
         font-size: 55px;
         font-family: 'Roboto Slab', serif;
@@ -17,7 +22,7 @@
         font-family: 'Roboto Slab', serif;
     }
     h6{
-        font-size: 10px;
+        font-size: 12px;
         font-weight: 200;
         font-family: 'Roboto Slab', serif;
     }
@@ -31,25 +36,59 @@
         background-color: red;
         flex-flow: flex-start;
     }
+    #top-carousel{
+        top:0;
+        bottom: auto;
+    }
+
     .carousel-inner > .carousel-item {
         height: 75vh;
 
     }
 
+    desc{
+
+    }
+
+    @media (max-width: 800px){
+        .carousel-inner > .carousel-item {
+        height: auto;
+        }
+        h1{
+        font-size: 3vh;
+        }
+        h4{
+            font-size: 1vh;
+        }
+        h6{
+            font-size: 1vh;
+        }
+        .carousel-caption{
+            margin-top: 0;
+            padding-top: 0;
+        }
+    
+    }
+
+
 </style>
 
-<div>
+<div class="mb-n3" style="background-color:white">
       
     {% for pics in gallery %} 
 
-        <div class="d-flex flex-column py-3 px-3 text-center">
-            <h4 class="">{{ pics.date|date:"l, F d, Y" }}</h4>
+        <!---<div class="d-flex flex-column py-3 px-3 text-center">
+            <h4 style="color:#461D7C ">{{ pics.date|date:"l, F d, Y" }}</h4>
             <h1 class="mt-n2">{{pics.title}}</h1>
-            <h6 class=""><a>View Full Gallery</a></h6>
-        </div>
+            {% if pics.full_gallery_link %}
+                <h6 class=""><a href="{{pics.full_gallery_link}}">View Full Gallery</a></h6>
+            {% else %}
+                <h6 class=""><a>Full Gallery Coming Soon</a></h6>
+            {% endif %}
+        </div>-->
 
-        <div class="container-fluid">
-            <div id="carousel{{pics.id}}" class="carousel slide" data-ride="carousel">
+        <div>
+            <div id="carousel{{pics.id}}" class="carousel slide carousel-fade" data-ride="carousel">
                 <div class="carousel-inner">
                     <ul class="carousel-indicators">
                         {% for picture in pics.images.all %} 
@@ -67,9 +106,21 @@
                         {% else %}
                             <div class="carousel-item">
                         {% endif %}
-                            <img src="{% thumbnail picture.image 1200x600 crop detail %}" alt="Image" class="d-block w-100">
-                            <div class="carousel-caption">
-                                <h3 class="h3-responsive" style="text-shadow: 3px 3px 4px black;">{{pics.title}}</h3>
+                            <img src="{% thumbnail picture.image 1200x600 crop detail %}" alt="Image" class="d-block w-100" style="filter: brightness(75%)">
+                           
+                            <div class="carousel-caption" id='top-carousel'>
+                                <div class="d-flex flex-column py-3 px-3 text-center">
+                                    <h4>{{ pics.date|date:"l, F d, Y" }}</h4>
+                                    <h1 class="mt-n2">{{pics.title}}</h1>
+                                    {% if pics.full_gallery_link %}
+                                        <h6 class="" ><a href="{{pics.full_gallery_link}}">View Full Gallery</a></h6>
+                                    {% else %}
+                                        <h6 class="" style="color: white">Full Gallery Coming Soon</h6>
+                                    {% endif %}
+                                </div>
+
+                            </div>
+                            <div class="carousel-caption desc">   
                                 <p class="" style="text-shadow: 2px 2px 8px black;"> {{picture.description}}</p>
                             </div>
                         </div>
@@ -85,10 +136,26 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
+            
         </div>
     
     {% endfor %}
 
 </div>  
 
-{% endblock %}
+<script>
+
+    function mobileDeviceUpdate(){
+        
+        if(window.matchMedia("(max-width: 767px)").matches){
+            $('#carousel-top-text').removeClass('py-3');
+            $('.carousel-indicators').hide();
+            $('.desc').hide();
+        } 
+    }
+
+    $(document).ready(mobileDeviceUpdate);
+    
+</script>
+
+{% endblock contentHome %}

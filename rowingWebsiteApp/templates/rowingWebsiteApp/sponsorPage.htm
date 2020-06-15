@@ -2,104 +2,84 @@
 {% load static %}
 
 
-    
 
-      
-    
 
 {% block top %}
     
-    <head> 
-        <link href="https://fonts.googleapis.com/css?family=Teko:600&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap" rel="stylesheet">
-    </head>
-    
-    <style>
-        
-        .bg{
-            background-image: url("{% static 'rowingWebsiteApp/Images/Team Image.jpg' %}");
-            height:75vh;
-            width: 100%;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-    </style>
-    
-    <div class="bg shadow-lg" >     
-    </div>
+    {% for banners in banner %}
+        <div class="image-container">
+            <h1 class="titles" >{{banners.sponsor_page_title}}</h1>
+            <div class="bg" style= "background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), 
+                                                                url('{{banners.sponsor_Banner.url}}'); ">  
+            </div>
+        </div>
+    {% endfor %}
 
 {% endblock top%}
 
 {% block content %}
     
-    <head> 
-        <link href="https://fonts.googleapis.com/css?family=Teko:600&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:200,400&display=swap" rel="stylesheet">
-    </head>
+<style>
+    
 
-    <style>
+    h5{
+        font-size: 20px;
+        font-weight:  200;
+        margin: 20px;
+        font-family: 'Roboto Slab', serif;
+    }
+
+    .img-back{
+        height:70vh;
+        width: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: scroll;
         
-        h1{
-            font-size: 45px;
-            font-weight: 500;
-            font-family: 'Roboto Slab', serif;
-        }
-
-        p{
-            font-size: 15px;
-            font-weight:  200;
-            font-family: 'Roboto Slab', serif;
-        }
-
-        h5{
-            font-size: 20px;
-            font-weight:  200;
-            margin: 20px;
-            font-family: 'Roboto Slab', serif;
-        }
- 
-        .contain-text{
-            margin-left: 200px;
-            margin-right: 200px;
-            line-height: 2.5;
-        }
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        filter: brightness(80%);
         
-    </style>
+    }
 
-    <div class="py-5">
-        <h1 class="text-center">Help A Brother Out</h1>
-    </div>
-
-    <div>
-        <p class="contain-text text-center"> Rowing is a very rewarding yet expensive sport.  Regatta fees, travel expenses, 
-            equipment maintenance are only some of the  costs to compete against the biggest teams in the south.  
-            In order to keep member fees as low as possible, we need people like you to help us.  
-            If you are interest in donating to the LSU Rowing Club, fill out this form and our sponsorship 
-            coordinator will get back to you as soon as possible.  
-        </p>
+    @media only screen and (max-device-width: 767px){
+        .img-back{
+            
+            background-attachment: scroll;
+            
+        }
+    }
         
-        <p class="contain-text mt-5 text-center">
-            Thank you so much for your support and REAUX TIGERS!
-        </p>
+</style>
 
+    {% for sections in sponsorText %}
+        <div class="py-5">
+            <h1 class="text-center">{{sections.title}}</h1>
+        </div>
+
+        <div>
+            <p class="contain-text text-center"> {{sections.text}}
+            </p>        
+        </div>
+    
+        <div class="justify-content-center d-flex flex-row contain-text">    
+
+            <p class=" mt-5 text-center">
+                    If you are interested in sponsoring, donating, or fundraising, please contact our fundraising coordinator
+                    {{sections.sponsorship_coordinator_name}} at <a href="mailto:">{{sections.sponsorship_coordinator_email}}</a>
+            </p>
+        </div>
+
+        <div class="img-back" style="background-image: url('{{sections.image.url}}');"></div>
         
+        
+    {% endfor %}
 
-    </div>
+   
 
-    <div class="justify-content-center d-flex flex-row contain-text">
-
-        <p class=" mt-5 text-center">
-                If you are interested in sponsoring, donating, or fundraising, please contact our fundraising coordinator
-                Aine O'nuain at aonia2@lsu.edu
-        </p>
-    </div>
-
-
+    
     <div class="py-5">
         <h1 class="text-center">Thank You to All of Our Donors </h1>
     </div>
@@ -107,27 +87,32 @@
     <div>
     
         <p class="contain-text text-center"> Through out our time many generous donors have helped us keep our 
-            club going. We could like to take time to dearly thank these individuals. 
+            club going. We could like to take time to dearly thank these individuals, in no particular order. 
         </p>
 
-        <div class="d-flex flex-wrap contain-text">
-            <h5> Uluc Ozdenvar</h5>
-            <h5> Uluc Ozdenvar</h5>
-            <h5> Uluc Ozdenvar</h5>
-            <h5> Uluc Ozdenvar</h5>
-            <h5> Uluc Ozdenvar</h6>
-            <h5> Uluc Ozdenvar</h5>
-            <h5> Uluc Ozdenvar</h5>
-            <h5> Uluc Ozdenvar</h5>
-            <h5> Uluc Ozdenvar</h5>
-            <h5> Uluc Ozdenvar</h5>
-            <h5> Uluc Ozdenvar</h5>
-            <h5> Uluc Ozdenvar</h6>
-            <h5> Uluc Ozdenvar</h5>
-            <h5> Uluc Ozdenvar</h5>
+        <div class="d-flex flex-wrap contain-text justify-content-center">
+            {% for sponsor in sponsors %}
+            <h5>{{sponsor.first_name}} {{sponsor.last_name}}</h5>
+            {% endfor%}
+            
         </div>
         
     </div>
+
+    <script>
+
+        function mobileDeviceUpdate(){
+            
+            if(window.matchMedia("(max-width: 767px)").matches){
+                $('#column-text').removeClass('mx-5');
+            } 
+            else{
+            }
+        }
+
+        $(document).ready(mobileDeviceUpdate);
+        
+    </script>
 
 {% endblock content%}
 
