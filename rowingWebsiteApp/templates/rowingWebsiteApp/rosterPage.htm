@@ -77,13 +77,14 @@
             .max-expand{
             max-width: 35vw;
             }
+
         }
 
         @media  (max-width: 700px){
             
             .block {
-            overflow: hidden;
-            width: 70vw;
+                overflow: hidden;
+                width: 70vw;
 
             }
             .block img {
@@ -92,8 +93,43 @@
             }
 
             .max-expand{
-            max-width: 70vw;
+                max-width: 70vw;
             }
+
+        }
+
+        @media only screen and (max-device-width: 767px){
+            .block {
+                overflow: hidden;
+                width: 90vw;
+
+            }
+            .block img {
+                width: 90vw;
+                float: left;
+            }
+
+            .max-expand{
+                max-width: 90vw;
+            }
+
+        }
+
+        @media only screen and (max-device-width: 767px) and (orientation:landscape){
+            .block {
+                overflow: hidden;
+                width: 40vw;
+
+            }
+            .block img {
+                width: 40vw;
+                float: left;
+            }
+
+            .max-expand{
+                max-width: 40vw;
+            }
+
         }
 
     
@@ -108,8 +144,8 @@
     <div class="mx-lg-4 my-2 center-flow flex-wrap" id=mens-varsity-roster>
         {% for rower in rower %}
         <div> 
-            <div class="d-flex flex-column player-card block my-1" id="rower-card" data-toggle="modal" data-target="#exampleModalCenter{{rower.id}}">
-                <img src= "{% thumbnail rower.picture 375x550 box=rower.cropping crop detail %}" alt="">
+            <div class="d-flex flex-column player-card block my-1" id="rower-card" >
+                <img src= "{% thumbnail rower.picture 750x1100 box=rower.cropping crop detail %}" alt="">
                 <div>
                     <div class ="py-2 name">
                         <h2 class="text-center mt-2"> {{ rower.first_name }} {{ rower.last_name }}</h2>
@@ -133,21 +169,7 @@
                 <input type="hidden" value="{{ rower.crew }}"/>
                 <input type="hidden" value="{{ rower.varsity }}"/>   
             </div>  
-            <!--<div class="modal fade" id="exampleModalCenter{{rower.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header" style="background-color: #461D7C">
-                            <h5 class="modal-title" style="color: white" id="exampleModalLongTitle">{{ rower.first_name }} {{ rower.last_name }}</h5>
-                            <button type="button" style="color: white" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <img src= "{% thumbnail rower.picture 375x550 box=rower.cropping crop detail %}" alt="" class="d-flex justify-content-around mx-auto">
-                        </div>
-                    </div>
-                </div>
-            </div>-->
+
         </div>   
                 
         {% endfor %}
@@ -227,71 +249,11 @@
             for(i = 0; i< dictMensNov.length; i++){
                 mensNovice.appendChild(dictMensNov[i]);
             }
-            
-            /*var rowersDict  = '{{rowers}}';
-            var rower = '{{rower}}'
-
-            var rowers= JSON.parse(rowersDict.replace(/&quot;/g,`"`));
-
-            console.log(rowers);
-            console.log(rower);
-            var mensVarsity = document.getElementById('mens-varsity-roster');
-            var mensNovice = document.getElementById('mens-novice-roster');
-            var womensVarsity = document.getElementById('womens-varsity-roster');
-            var womensNovice = document.getElementById('womens-novice-roster');
-            var coxswains = document.getElementById('coxswains');
-
-            for(i=0; i<rowers.length; i++){
-
-                /*var htmlString = `<div class="d-flex flex-column player-card mx-1 block my-2">
-                        <img src= ""  alt="">
-                    <div>
-                        <p>${rowers[i].picture}</p>
-                        <div class ="py-4 name">
-                            <h2 class="text-center mt-2"> ${ rowers[i].name }</h2>
-                            <h5 class="text-center text-values"> ${ rowers[i].year }</h5>
-                        </div>
-                        <div class="py-2 d-flex flex-row">
-                            <div class="py-2 ml-3 mr-2">
-                                <h5 class="text-set"> Orientation: </h5> 
-                                <h5 class="text-set"> Hometown: </h5>    
-                                <h5 class="text-set"> Major: </h5>
-                            </div>
-                            <div class="py-2">   
-                                <h5 class="text-values"> ${ rowers[i].orientation }</h5>                       
-                                <h5 class="text-values"> ${ rowers[i].hometown } </h5>                       
-                                <h5 class="text-values"> ${ rowers[i].major } </h5>            
-                            </div>
-                        </div>
-                    </div>
-                </div> `;
-                
-                if(rowers[i].crew === 'Mens'){
-                    if(rowers[i].varsity === 'Yes'){
-                        $(mensVarsity).append(htmlString);
-                    }
-                    else{
-                        $(mensNovice).append(htmlString);
-                    }
-                }
-                else {
-                    if(rowers[i].varsity === 'Yes'){
-                        $(womensVarsity).append(htmlString);
-                    }
-                    else{
-                        $(womensNovice).append(htmlString);
-                    }
-                }
-                if(rowers[i].orientation === 'Coxswain'){
-                    $(coxswains).append(htmlString);
-                }
-            }*/
-            
+                   
         });
-        function imageSizing() {
-                
-               console.log($(window).width())
-                
+        function imageSizing() {  
+            console.log($(window).width())
+  
         }
         $(window).resize(imageSizing);
     </script>

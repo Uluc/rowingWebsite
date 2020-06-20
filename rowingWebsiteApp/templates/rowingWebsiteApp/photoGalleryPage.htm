@@ -6,6 +6,10 @@
 {% block contentHome %}
 <style>
 
+.link-gallery a{
+    color: white !important;
+}
+
     .carousel-indicators li {
         width: 10px;
         height: 10px;
@@ -46,8 +50,8 @@
 
     }
 
-    desc{
-
+    a{
+        color: white;
     }
 
     @media (max-width: 800px){
@@ -77,16 +81,6 @@
       
     {% for pics in gallery %} 
 
-        <!---<div class="d-flex flex-column py-3 px-3 text-center">
-            <h4 style="color:#461D7C ">{{ pics.date|date:"l, F d, Y" }}</h4>
-            <h1 class="mt-n2">{{pics.title}}</h1>
-            {% if pics.full_gallery_link %}
-                <h6 class=""><a href="{{pics.full_gallery_link}}">View Full Gallery</a></h6>
-            {% else %}
-                <h6 class=""><a>Full Gallery Coming Soon</a></h6>
-            {% endif %}
-        </div>-->
-
         <div>
             <div id="carousel{{pics.id}}" class="carousel slide carousel-fade" data-ride="carousel">
                 <div class="carousel-inner">
@@ -106,16 +100,17 @@
                         {% else %}
                             <div class="carousel-item">
                         {% endif %}
-                            <img src="{% thumbnail picture.image 1200x600 crop detail %}" alt="Image" class="d-block w-100" style="filter: brightness(75%)">
+                            <img src="{% thumbnail picture.image 1800x900 crop detail %}" alt="Image" class="d-block w-100" style="filter: brightness(85%)">
                            
                             <div class="carousel-caption" id='top-carousel'>
-                                <div class="d-flex flex-column py-3 px-3 text-center">
+                                <div class="d-flex flex-column py-3 px-3 text-center" style="color: white;">
                                     <h4>{{ pics.date|date:"l, F d, Y" }}</h4>
                                     <h1 class="mt-n2">{{pics.title}}</h1>
+                                    
                                     {% if pics.full_gallery_link %}
-                                        <h6 class="" ><a href="{{pics.full_gallery_link}}">View Full Gallery</a></h6>
+                                        <h6 class="link-gallery"><a href="{{pics.full_gallery_link}}">View Full Gallery</a></h6>
                                     {% else %}
-                                        <h6 class="" style="color: white">Full Gallery Coming Soon</h6>
+                                        <h6>Full Gallery Coming Soon</h6>
                                     {% endif %}
                                 </div>
 
