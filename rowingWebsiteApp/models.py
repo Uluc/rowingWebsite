@@ -4,6 +4,7 @@ from image_cropping.fields import ImageRatioField, ImageCropField
 from django.conf import settings
 from easy_thumbnails.fields import ThumbnailerImageField
 from imagekit.models import ImageSpecField
+from imagekit import ImageSpec
 from imagekit.processors import ResizeToFill
 from imagekit.models import ProcessedImageField
 from zipfile import ZipFile
@@ -13,7 +14,11 @@ from django.utils.html import format_html
 from django.utils.html import escape
 from django.core.exceptions import ValidationError
 
-# Create your models here.
+class CustomManager(models.Manager):
+    def delete(self):
+        for obj in self.get_queryset():
+            obj.delete()
+
 
 class Rower(models.Model):
 
@@ -46,7 +51,7 @@ class Rower(models.Model):
     orientation = models.CharField(max_length=64, choices=ORIENTATION)
     hometown = models.CharField(max_length=64, help_text=("Example: Baton Rouge, LA"))
     major = models.CharField(max_length=64)
-    picture = models.ImageField(upload_to = 'rowingWebsite/rowingWebsiteApp/media/')
+    picture = models.ImageField(upload_to = '')
     cropping = ImageRatioField('picture', '5x7')
     crew = models.CharField(max_length=64, choices=CREWS)
     varsity = models.CharField(max_length=64, choices=VARSITY)
@@ -60,6 +65,12 @@ class Rower(models.Model):
     class Meta:
         ordering = ['last_name']
 
+    objects = CustomManager() # just add this line of code inside of your model
+
+    def delete(self, using=None, keep_parents=False):
+        self.picture.storage.delete(self.picture.name)
+        super().delete()
+
 class Race(models.Model):
 
     SEMESTER = (
@@ -71,6 +82,7 @@ class Race(models.Model):
     location= models.CharField(max_length=64, help_text=("Event address ex: 3355 Dalrymple Dr, Baton Rouge, LA 70802"))
     date = models.DateField(null=True, blank=True)
     semester = models.CharField(max_length=64, choices=SEMESTER)
+    public = models.BooleanField(default = False, help_text=("When this is checked the race will be displayed on the website"))
     results = models.TextField(help_text=("List Event Results Here"),null=True, blank=True)
 
     class Meta:
@@ -85,6 +97,7 @@ class Event(models.Model):
     location= models.CharField(max_length=64, help_text=("Event address ex: 3355 Dalrymple Dr, Baton Rouge, LA 70802"))
     date = models.DateField(null=True, blank=True, help_text=("Select a date from the picker."))
     time= models.CharField(max_length=64, help_text=("Example: 3pm - 5pm"))
+    public = models.BooleanField(default = False, help_text=("When this is checked the event will be displayed on the website"))
 
     def __str__(self):
         return self.event
@@ -99,8 +112,7 @@ class Leadership(models.Model):
     name = models.CharField(max_length=64)
     position = models.CharField(max_length=64)
     staff = models.CharField(max_length=64, choices=STAFF, default='Officer')
-    picture = models.ImageField(upload_to = 'rowingWebsite/rowingWebsiteApp/media/')
-    cropping = ImageRatioField('picture', '5x5')
+    picture = models.ImageField(upload_to = 'leadership');
     writeUp = models.TextField(help_text=("This will be the text that get displayed under the officer"))
     my_order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
@@ -129,7 +141,7 @@ class Picture(models.Model):
     ("Describe your images so they can easily be identified to be added into appropriate gallery "))
     
     image = models.ImageField(upload_to='images')
-    image_thumbnail = ImageSpecField(source='image', processors=[ResizeToFill(125, 125)], format='JPEG', options={'quality': 80})
+    image_thumbnail = ImageSpecField(source='image', processors=[ResizeToFill(125, 125)], format='JPEG', options={'quality': 60})
 
     def __str__(self):
         return self.asociated_event + " - " + self.description
@@ -137,7 +149,7 @@ class Picture(models.Model):
 class Gallery(models.Model):
     title = models.CharField(max_length=64, help_text=("Name for the gallery"))
     date = models.DateField(help_text=("Date the event occured"))
-    full_gallery_link = models.URLField(max_length=200, help_text="place google drive url here for the whole album", default='')
+    full_gallery_link = models.URLField(max_length=200, help_text="place google drive url here for the whole album", default='', blank= True)
     images = SortedManyToManyField(Picture)
     
 
@@ -154,22 +166,26 @@ class HomePage(models.Model):
     title = models.CharField(max_length=32)
     text = models.TextField(help_text=("This will be the text that gets displayed"))
     image = models.ImageField(upload_to='template_photos')
+    my_order = models.PositiveIntegerField(default=0, blank=False, null=False)
+    
 
     class Meta:
+        ordering = ['my_order']
         verbose_name_plural = " Home Page Entries"
-
+        
     def __str__(self):
         return self.title
+
 
 class AboutPage(models.Model):
     
     title = models.CharField(max_length=32)
     text = models.TextField(help_text=("This will be the text that gets displayed"))
     image = models.ImageField(upload_to='template_photos')
-    image2 = models.ImageField(upload_to='template_photos')
-    image3 = models.ImageField(upload_to='template_photos')
+    my_order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
     class Meta:
+        ordering = ['my_order']
         verbose_name_plural = " About Us Page Entries"
 
     def __str__(self):
@@ -180,6 +196,7 @@ class RecruitmentPage(models.Model):
     title = models.CharField(max_length=32)
     text = models.TextField(help_text=("This will be the text that gets displayed"))
     questionaire_link = models.CharField(max_length=128)
+    image = models.ImageField(help_text=("This will be the image that gets displayed under the text"), upload_to='recruitmentPagePictures', default='none')
 
     class Meta:
         verbose_name_plural = " Recruitment Page Entries"
@@ -222,3 +239,32 @@ class SponsorPage(models.Model):
         except cls.DoesNotExist:
             return cls()
 
+class PageBanners(models.Model):
+
+    title = models.CharField(max_length=50, blank=True)
+
+    home_page_title = models.CharField(max_length=50, default="Welcome To LSU Rowing")
+    home_Banner = models.ImageField(upload_to='banners', default='')
+    image_thumbnail_home = ImageSpecField(source='home_Banner', processors=[ResizeToFill(300, 200)], format='JPEG', options={'quality': 60})
+    
+    recruitment_page_title = models.CharField(max_length=50)
+    recruitment_Banner = models.ImageField(upload_to='banners')
+    image_thumbnail_recruitment = ImageSpecField(source='recruitment_Banner', processors=[ResizeToFill(300, 200)], format='JPEG', options={'quality': 60})
+    
+    about_page_title = models.CharField(max_length=50)
+    about_Banner = models.ImageField(upload_to='banners')
+    image_thumbnail_about = ImageSpecField(source='about_Banner', processors=[ResizeToFill(300, 200)], format='JPEG', options={'quality': 60})
+    
+    schedule_page_title = models.CharField(max_length=50)
+    schedule_Banner = models.ImageField(upload_to='banners')
+    image_thumbnail_schedule = ImageSpecField(source='schedule_Banner', processors=[ResizeToFill(300, 200)], format='JPEG', options={'quality': 60})
+   
+    sponsor_page_title = models.CharField(max_length=50)
+    sponsor_Banner = models.ImageField(upload_to='banners')
+    image_thumbnail_sponsor = ImageSpecField(source='sponsor_Banner', processors=[ResizeToFill(300, 200)], format='JPEG', options={'quality': 60})
+
+    def __str__(self):
+        return "Website Banners"
+    
+    class Meta:
+        verbose_name_plural = "     Page Banners"

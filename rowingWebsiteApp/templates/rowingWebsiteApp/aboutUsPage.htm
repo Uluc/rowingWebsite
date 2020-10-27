@@ -46,15 +46,15 @@
     <div class="">
         {% for sections in aboutText %}
             <div>
-                <div class="text-dark text-center py-5">
+                <div class="text-dark text-center py-3">
                     <h1>{{sections.title}}</h1>
                 </div>     
-                <div class="contain-text text-center linebreaks">{{sections.text|linebreaks}}</div>
+                <div class="contain-text text-center">{{sections.text|linebreaks}}</div>
                 
 
             </div>
 
-            <div class="img-back" style="background-image: url('{{sections.image.url}}');"></div>
+            <div class="img-back mt-2" style="background-image: url('{{sections.image.url}}');"></div>
 
             {% if forloop.last %}
             {% else %}

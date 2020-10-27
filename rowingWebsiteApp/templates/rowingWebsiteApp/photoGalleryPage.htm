@@ -6,9 +6,9 @@
 {% block contentHome %}
 <style>
 
-.link-gallery a{
-    color: white !important;
-}
+    .link-gallery a{
+        color: white !important;
+    }
 
     .carousel-indicators li {
         width: 10px;
@@ -36,30 +36,47 @@
         display: flex;
         justify-content: space-around;
     }
-    .contain{
-        background-color: red;
-        flex-flow: flex-start;
-    }
     #top-carousel{
         top:0;
         bottom: auto;
     }
-
     .carousel-inner > .carousel-item {
         height: 75vh;
-
+        max-height: 75vh;
     }
+
+    .carousel-inner img {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: trasnlateY(-50%);
+    -o-transform: trasnlateY(-50%);
+    transform: trasnlateY(-50%);
+}
 
     a{
         color: white;
     }
 
-    @media (max-width: 800px){
-        .carousel-inner > .carousel-item {
-        height: auto;
+    @media (max-width: 1100px){
+
+    .carousel-inner > .carousel-item {
+        height: 53vh;
+        max-height: 53vh;
         }
+    }
+
+    @media (max-width: 800px){
+
+        .carousel-inner > .carousel-item {
+        height: 32vh;
+        max-height: 32vh;
+    }
+        
         h1{
-        font-size: 3vh;
+            font-size: 3vh;
         }
         h4{
             font-size: 1vh;
@@ -73,6 +90,21 @@
         }
     
     }
+
+    @media only screen and (max-device-width : 812px){
+        .carousel-inner > .carousel-item {
+        height: 25vh;
+        max-height: 25vh;
+        }
+    }
+
+    @media only screen and (max-device-width : 812px) and (orientation : landscape){
+        .carousel-inner > .carousel-item {
+        height: 50vh;
+        max-height: 50vh;
+        }
+    }
+
 
 
 </style>
@@ -100,7 +132,7 @@
                         {% else %}
                             <div class="carousel-item">
                         {% endif %}
-                            <img src="{% thumbnail picture.image 1800x900 crop detail %}" alt="Image" class="d-block w-100" style="filter: brightness(85%)">
+                            <img src="{% thumbnail picture.image 1800x900 crop detail %}" alt="Image" class="d-block w-100 " style="filter: brightness(85%)">
                            
                             <div class="carousel-caption" id='top-carousel'>
                                 <div class="d-flex flex-column py-3 px-3 text-center" style="color: white;">

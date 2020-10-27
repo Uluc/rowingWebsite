@@ -28,6 +28,12 @@ class MyModelAdmin(ImageCroppingMixin, admin.ModelAdmin):
 class AdminGallery(ImageCroppingMixin, admin.ModelAdmin):
     pass
 
+class HomePageAdmin(SortableAdminMixin, admin.ModelAdmin):
+    pass
+
+class AboutUsAdmin(SortableAdminMixin, admin.ModelAdmin):
+    pass
+
 class MyModelAdminSorting(SortableAdminMixin, admin.ModelAdmin):
     list_display = ['name', 'position', 'staff']
 
@@ -38,6 +44,9 @@ class FancyAdmin(admin.ModelAdmin):
 
     # set this to also show the image in the change view
     readonly_fields = ['image_display']
+    list_per_page = 15
+
+
 
 class RecruitmentAdmin(NoDeleteAdminMixin, admin.ModelAdmin):
     pass
@@ -65,14 +74,13 @@ class BannerAdmin(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         return False
     def has_add_permission(self, request):
-        return False
-
-
-admin.site.register(HomePage)
+       return False
+    
+admin.site.register(HomePage, HomePageAdmin)
 admin.site.register(SponsorPage, SponsorAdmin)
 admin.site.register(RecruitmentPage, RecruitmentAdmin)
 admin.site.register(PageBanners, BannerAdmin)
-admin.site.register(AboutPage)
+admin.site.register(AboutPage, AboutUsAdmin)
 admin.site.register(Sponsor)
 admin.site.register(Rower, MyModelAdmin)
 admin.site.register(Race)

@@ -8,8 +8,10 @@ from django.db.models import F
 from django.core.mail import send_mail
 
 
-
+emailAddress = 'reauxtigers@gmail.com'
 # Create your views here.
+
+
 
 class ExtendedEncoder(DjangoJSONEncoder):
     def default(self, o):
@@ -18,20 +20,12 @@ class ExtendedEncoder(DjangoJSONEncoder):
         else:
             return super().default(o)
 
-def aboutus(request):
-    data={
-        'nbar' : 'aboutus',
-        'aboutText' : AboutPage.objects.all(),
+def home(request):
+    data = {
+        'nbar' : 'home',
+        'homeText' : HomePage.objects.all(),
         'banner' : PageBanners.objects.all()
     }
-    return render(request, 'rowingWebsiteApp/aboutUsPage.htm', data)
-
-def confirmed(request):
-    return render(request, 'rowingWebsiteApp/confirmationPage.htm')
-
-def home(request):
-    nbar = 'home'
-    homeText = HomePage.objects.all()
 
     if request.method == "POST":
         message_name = request.POST['message-name']
@@ -39,15 +33,27 @@ def home(request):
         message = request.POST['message']
 
         send_mail(
-            'Inquiry from ' + message_name,
+            'Website Inquiry from ' + message_name + message_email,
             message,
             message_email,
-            ['ulucozdenvar01@gmail.com'],
+            [emailAddress],
         )
 
-        return render(request, 'rowingWebsiteApp/homePage.htm', {'nbar':nbar, 'homeText':homeText})
+        return render(request, 'rowingWebsiteApp/confirmationPage.htm')
     else:
-        return render(request, 'rowingWebsiteApp/homePage.htm', {'nbar':nbar, 'homeText':homeText})
+        return render(request, 'rowingWebsiteApp/homePage.htm', data)
+
+def aboutus(request):
+    data={
+        'nbar' : 'aboutus',
+        'aboutText' : AboutPage.objects.all(),
+        'banner' : PageBanners.objects.all()
+    }
+    
+    return render(request, 'rowingWebsiteApp/aboutUsPage.htm', data)
+
+def confirmed(request):
+    return render(request, 'rowingWebsiteApp/confirmationPage.htm')
 
 def photogallery(request):
     data = {
