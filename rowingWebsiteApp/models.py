@@ -99,6 +99,10 @@ class Event(models.Model):
     time= models.CharField(max_length=64, help_text=("Example: 3pm - 5pm"))
     public = models.BooleanField(default = False, help_text=("When this is checked the event will be displayed on the website"))
 
+
+    class Meta:
+        ordering = ['date']
+        
     def __str__(self):
         return self.event
 

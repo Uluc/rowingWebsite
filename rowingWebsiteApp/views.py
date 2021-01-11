@@ -33,8 +33,8 @@ def home(request):
         message = request.POST['message']
 
         send_mail(
-            'Website Inquiry from ' + message_name + message_email,
-            message,
+            'Website Inquiry from ' + message_name,
+            message + ' Related Email Address' + message_email,
             message_email,
             [emailAddress],
         )
